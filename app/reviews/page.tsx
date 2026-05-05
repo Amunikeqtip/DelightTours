@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import PlatformIcons from "@/components/PlatformIcons";
 import ReviewCard, { Review } from "@/components/ReviewCard";
 
 const reviews: Review[] = [
@@ -21,26 +22,26 @@ export default function ReviewsPage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+    <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:py-16">
       <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Customer Reviews</h1>
-        <p className="text-foreground/60">Verified reviews from Tripadvisor and our travelers.</p>
+        <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Reviews</p>
+        <h1 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">Guest feedback</h1>
+        <p className="text-foreground/65">Verified reviews from Tripadvisor and our travelers.</p>
       </div>
 
-      {/* Summary */}
-      <div className="bg-white border border-border rounded-xl p-6 mb-8 flex flex-col sm:flex-row items-center gap-6">
+      <div className="mb-8 flex flex-col items-center gap-6 rounded-md border border-border bg-white p-6 shadow-sm sm:flex-row">
         <div className="text-center">
           <p className="text-5xl font-bold text-primary">4.8</p>
-          <div className="text-amber-500 text-xl mt-1">★ ★ ★ ★ ★</div>
+          <div className="mt-1 text-xl text-accent">★ ★ ★ ★ ★</div>
           <p className="text-sm text-foreground/50 mt-1">Based on 1,200+ reviews</p>
         </div>
         <div className="flex-1 grid grid-cols-5 gap-2 max-w-md">
           {[5, 4, 3, 2, 1].map((star) => (
             <div key={star} className="contents">
               <span className="text-sm text-foreground/60 text-right">{star}★</span>
-              <div className="col-span-3 bg-accent-light rounded-full h-3 my-auto">
+              <div className="col-span-3 my-auto h-3 rounded-full bg-accent-light">
                 <div
-                  className="bg-primary rounded-full h-3"
+                  className="h-3 rounded-full bg-primary"
                   style={{ width: `${star === 5 ? 78 : star === 4 ? 18 : star === 3 ? 3 : 1}%` }}
                 />
               </div>
@@ -50,14 +51,13 @@ export default function ReviewsPage() {
         </div>
       </div>
 
-      {/* Sort */}
       <div className="flex items-center gap-4 mb-6">
         <span className="text-sm font-semibold text-foreground">Sort by:</span>
         {(["rating", "date"] as const).map((option) => (
           <button
             key={option}
             onClick={() => setSortBy(option)}
-            className={`text-sm px-4 py-1.5 rounded-full transition-colors ${
+            className={`rounded-md px-4 py-1.5 text-sm font-semibold transition-colors ${
               sortBy === option
                 ? "bg-primary text-white"
                 : "bg-accent-light text-foreground hover:bg-accent"
@@ -68,17 +68,15 @@ export default function ReviewsPage() {
         ))}
       </div>
 
-      {/* Reviews Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {sorted.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
       </div>
 
-      {/* Tripadvisor Badge */}
       <div className="mt-12 text-center">
-        <div className="inline-flex items-center gap-3 bg-white border border-border rounded-xl px-6 py-4">
-          <span className="text-2xl">🏆</span>
+        <div className="inline-flex items-center gap-3 rounded-md border border-border bg-white px-6 py-4 shadow-sm">
+          <PlatformIcons compact include={["Tripadvisor"]} />
           <div className="text-left">
             <p className="text-sm font-semibold text-foreground">Tripadvisor Recommended</p>
             <p className="text-xs text-foreground/50">Verified reviews powered by Tripadvisor</p>

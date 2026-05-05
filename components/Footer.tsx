@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import PlatformIcons from "@/components/PlatformIcons";
 
 const footerLinks = {
   "Quick Links": [
@@ -17,22 +19,30 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-muted border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="border-t border-border bg-muted">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-12 sm:px-6 md:grid-cols-4">
         <div>
-          <h3 className="text-lg font-bold text-primary mb-3">Delight Tours</h3>
-          <p className="text-sm text-foreground/70 leading-relaxed">
-            Crafting unforgettable travel experiences with care, passion, and local expertise.
+          <Link href="/" className="mb-4 flex items-center gap-3">
+            <Image
+              src="/delighttoursandtravel.png"
+              alt="Delight Tours & Travel"
+              width={160}
+              height={56}
+              className="h-12 w-auto object-contain object-left"
+            />
+          </Link>
+          <p className="text-sm leading-relaxed text-foreground/70">
+            Minimal, professional travel planning for Victoria Falls and the wider region.
           </p>
         </div>
 
         {Object.entries(footerLinks).map(([title, links]) => (
           <div key={title}>
-            <h4 className="text-sm font-semibold text-foreground mb-3">{title}</h4>
+            <h4 className="mb-3 text-sm font-bold text-foreground">{title}</h4>
             <ul className="space-y-2">
               {links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-foreground/70 hover:text-primary transition-colors">
+                  <Link href={link.href} className="text-sm text-foreground/70 transition-colors hover:text-primary">
                     {link.label}
                   </Link>
                 </li>
@@ -42,13 +52,13 @@ export default function Footer() {
         ))}
 
         <div>
-          <h4 className="text-sm font-semibold text-foreground mb-3">Connect</h4>
-          <div className="flex gap-4">
+          <h4 className="mb-3 text-sm font-bold text-foreground">Connect</h4>
+          <div className="flex flex-wrap gap-4">
             {["Facebook", "Instagram", "Twitter", "Tripadvisor"].map((social) => (
               <a
                 key={social}
                 href="#"
-                className="text-sm text-foreground/70 hover:text-primary transition-colors"
+                className="text-sm text-foreground/70 transition-colors hover:text-primary"
               >
                 {social}
               </a>
@@ -58,13 +68,14 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-2">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-4 sm:px-6 md:flex-row">
           <p className="text-xs text-foreground/50">
             &copy; {new Date().getFullYear()} Delight Tours & Travel. All rights reserved.
           </p>
-          <p className="text-xs text-foreground/50">
-            Powered by Bókun &middot; Viator &middot; GetYourGuide &middot; Tripadvisor
-          </p>
+          <div className="flex items-center gap-3 text-xs text-foreground/50">
+            <span>Powered by</span>
+            <PlatformIcons compact />
+          </div>
         </div>
       </div>
     </footer>
