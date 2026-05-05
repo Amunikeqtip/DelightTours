@@ -16,7 +16,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-white/95 shadow-sm backdrop-blur">
+    <nav className="soft-animated-surface sticky top-0 z-50 border-b border-border shadow-sm backdrop-blur">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-6">
         <Link href="/" className="flex min-w-0 items-center" aria-label="Delight Tours & Travel home">
           <Image
