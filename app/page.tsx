@@ -42,8 +42,22 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-accent-cream to-accent-light">
-        <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col items-center text-center">
+      <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster="/delighttoursandtravel.png"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="https://cdn.pixabay.com/video/2023/11/13/188290-886761768_large.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
           <Image
             src="/delighttoursandtravel.png"
             alt="Delight Tours & Travel"
@@ -52,23 +66,23 @@ export default function Home() {
             className="h-20 w-auto mb-8"
             priority
           />
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 drop-shadow-lg">
             Discover the World with
-            <span className="text-primary"> Delight</span>
+            <span className="text-accent-light"> Delight</span>
           </h1>
-          <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mb-8">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mb-8 drop-shadow-md">
             Curated tours and unforgettable travel experiences, crafted with care and local expertise.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
               href="/tours"
-              className="bg-cta text-white text-base font-semibold px-8 py-3 rounded-full hover:bg-cta-hover transition-colors"
+              className="bg-cta text-white text-base font-semibold px-8 py-3 rounded-full hover:bg-cta-hover transition-colors shadow-lg"
             >
               Explore Tours
             </Link>
             <Link
               href="/booking"
-              className="bg-white text-primary border-2 border-primary text-base font-semibold px-8 py-3 rounded-full hover:bg-accent-cream transition-colors"
+              className="bg-white text-primary border-2 border-white text-base font-semibold px-8 py-3 rounded-full hover:bg-accent-cream transition-colors shadow-lg"
             >
               Book Now
             </Link>
