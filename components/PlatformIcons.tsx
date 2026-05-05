@@ -46,7 +46,7 @@ function PlatformLogo({
       className={
         compact
           ? "flex h-8 items-center justify-center"
-          : "flex h-12 items-center justify-center rounded-md border border-border bg-white px-4 py-2 shadow-sm"
+          : "flex h-11 min-w-0 flex-1 items-center justify-center rounded-md border border-border bg-white px-3 py-2 shadow-sm sm:h-12 sm:flex-none sm:px-4"
       }
       title={platform.name}
     >
@@ -55,7 +55,7 @@ function PlatformLogo({
         alt={platform.name}
         width={platform.width}
         height={platform.height}
-        className={compact ? "h-6 w-auto object-contain" : "max-h-7 w-auto object-contain"}
+        className={compact ? "h-5 w-auto object-contain sm:h-6" : "max-h-6 max-w-[108px] object-contain sm:max-h-7 sm:max-w-[128px]"}
       />
     </span>
   );
@@ -71,7 +71,7 @@ export default function PlatformIcons({
   const selected = platforms.filter((platform) => include.includes(platform.name));
 
   return (
-    <div className={compact ? "flex items-center gap-3" : "flex flex-wrap items-center gap-3"}>
+    <div className={compact ? "flex flex-wrap items-center justify-center gap-2 sm:gap-3" : "grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:flex-wrap sm:items-center sm:gap-3"}>
       {selected.map((platform) => (
         <PlatformLogo key={platform.name} platform={platform} compact={compact} />
       ))}

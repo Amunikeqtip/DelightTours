@@ -47,7 +47,7 @@ function BookingForm() {
 
   if (submitted) {
     return (
-      <div className="max-w-2xl mx-auto px-6 py-24 text-center">
+      <div className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6 sm:py-24">
         <div className="text-6xl mb-6">✅</div>
         <h1 className="text-3xl font-bold text-foreground mb-4">Booking Confirmed!</h1>
         <p className="text-foreground/60 mb-2">
@@ -64,15 +64,15 @@ function BookingForm() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-5 py-12 sm:px-6 md:py-16">
-      <div className="mb-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Booking</p>
-        <h1 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">Book your tour</h1>
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
+      <div className="mb-8 sm:mb-10">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Booking</p>
+        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Book your tour</h1>
         <p className="text-foreground/65">Send your details and we will confirm availability, timing, and final arrangements.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <form onSubmit={handleSubmit} className="space-y-5 rounded-md border border-border bg-white p-6 shadow-sm lg:col-span-2">
+        <form onSubmit={handleSubmit} className="space-y-5 rounded-md border border-border bg-white p-4 shadow-sm sm:p-6 lg:col-span-2">
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-4">Select Tour</h2>
             <select
@@ -182,7 +182,7 @@ function BookingForm() {
           </button>
         </form>
 
-        <div className="h-fit rounded-md border border-border bg-accent-cream p-6">
+        <div className="h-fit rounded-md border border-border bg-accent-cream p-4 sm:p-6">
           <h2 className="text-lg font-semibold text-foreground mb-4">Booking Summary</h2>
           {selectedTour ? (
             <div className="space-y-3">
@@ -211,7 +211,7 @@ function BookingForm() {
             <p className="text-sm text-foreground/50">Select a tour to see summary</p>
           )}
           <div className="mt-4 pt-4 border-t border-border">
-            <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-xs text-foreground/50">Secure checkout powered by Bokun</p>
               <PlatformIcons compact include={["Bokun"]} />
             </div>

@@ -41,7 +41,7 @@ const featuredTours: Tour[] = [
 export default function Home() {
   return (
     <div>
-      <section className="relative flex min-h-[calc(100vh-80px)] items-center overflow-hidden">
+      <section className="relative flex min-h-[calc(100svh-64px)] items-center overflow-hidden sm:min-h-[calc(100vh-80px)]">
         <video
           autoPlay
           loop
@@ -55,16 +55,16 @@ export default function Home() {
         <div className="absolute inset-0 bg-primary-dark/70" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-10 px-5 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.75fr] lg:items-end">
+        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_0.75fr] lg:items-end">
           <div className="max-w-3xl text-white">
-            <p className="mb-5 text-sm font-bold uppercase tracking-[0.28em] text-accent-light">Victoria Falls experiences</p>
-            <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white md:text-6xl">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:mb-5 sm:text-sm sm:tracking-[0.28em]">Victoria Falls experiences</p>
+            <h1 className="max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-6xl">
               Travel simply, beautifully, and with people who know the place.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/85">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-white/85 sm:mt-6 sm:text-lg sm:leading-8">
               Minimal fuss, thoughtful planning, and guided tours across Victoria Falls, the Zambezi, Chobe, and beyond.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row">
               <Link
                 href="/tours"
                 className="inline-flex items-center justify-center rounded-md bg-cta px-7 py-3 text-sm font-bold text-white shadow-lg transition-colors hover:bg-cta-hover"
@@ -80,15 +80,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-3 border-l border-white/20 pl-6 text-white/85 sm:grid-cols-3 lg:grid-cols-1">
+          <div className="grid grid-cols-3 gap-3 border-t border-white/20 pt-5 text-white/85 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0 lg:grid-cols-1">
             {[
               ["4.8/5", "Guest rating"],
               ["1,200+", "Happy travelers"],
               ["24h", "Fast confirmations"],
             ].map(([value, label]) => (
               <div key={label}>
-                <p className="text-3xl font-bold text-white">{value}</p>
-                <p className="mt-1 text-sm">{label}</p>
+                <p className="text-xl font-bold text-white sm:text-3xl">{value}</p>
+                <p className="mt-1 text-xs leading-4 sm:text-sm">{label}</p>
               </div>
             ))}
           </div>
@@ -96,7 +96,7 @@ export default function Home() {
       </section>
 
       <section className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-12 sm:px-6 md:grid-cols-3">
+        <div className="mx-auto grid max-w-7xl gap-7 px-4 py-10 sm:px-6 sm:py-12 md:grid-cols-3">
           {[
             ["Local planning", "Routes, transfers, timings, and special requests handled with practical local knowledge."],
             ["Trusted partners", "Book confidently across Bokun, Viator, GetYourGuide, and Tripadvisor-ready workflows."],
@@ -111,17 +111,17 @@ export default function Home() {
       </section>
 
       <section className="border-b border-border bg-muted/60">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-5 py-8 sm:px-6 md:flex-row md:items-center md:justify-between">
-          <p className="text-sm font-bold uppercase tracking-[0.22em] text-accent">Connected platforms</p>
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between">
+          <p className="text-center text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-left sm:text-sm">Connected platforms</p>
           <PlatformIcons />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6 md:py-24">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 md:py-24">
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Featured tours</p>
-            <h2 className="max-w-2xl text-3xl font-bold text-foreground md:text-4xl">Small, polished experiences around the Falls.</h2>
+            <h2 className="max-w-2xl text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Small, polished experiences around the Falls.</h2>
           </div>
           <Link href="/tours" className="text-sm font-bold text-primary transition-colors hover:text-cta">
             View all tours
@@ -135,11 +135,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-muted py-16 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:items-center">
+      <section className="bg-muted py-14 sm:py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:items-center">
           <div>
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Why Delight</p>
-            <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
               Professional travel support without making the page feel busy.
             </h2>
           </div>
@@ -158,9 +158,9 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-16 text-center sm:px-6 md:py-24">
+      <section className="mx-auto max-w-7xl px-4 py-14 text-center sm:px-6 sm:py-16 md:py-24">
         <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Ready when you are</p>
-        <h2 className="mx-auto max-w-2xl text-3xl font-bold text-foreground md:text-4xl">
+        <h2 className="mx-auto max-w-2xl text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
           Let us shape a clean, memorable itinerary for your next trip.
         </h2>
         <Link

@@ -2,6 +2,27 @@
 
 import { useState } from "react";
 
+const socialLinks = [
+  {
+    name: "Facebook",
+    href: "#",
+    viewBox: "0 0 24 24",
+    path: "M14.2 8.4V6.7c0-.8.2-1.2 1.3-1.2h1.6V2.8c-.8-.1-1.5-.2-2.3-.2-2.4 0-4 1.5-4 4v1.8H8.1v3h2.7v9h3.4v-9H17l.4-3h-3.2Z",
+  },
+  {
+    name: "Instagram",
+    href: "#",
+    viewBox: "0 0 24 24",
+    path: "M7.4 2.8h9.2c2.5 0 4.6 2.1 4.6 4.6v9.2c0 2.5-2.1 4.6-4.6 4.6H7.4a4.6 4.6 0 0 1-4.6-4.6V7.4c0-2.5 2.1-4.6 4.6-4.6Zm0 2A2.6 2.6 0 0 0 4.8 7.4v9.2a2.6 2.6 0 0 0 2.6 2.6h9.2a2.6 2.6 0 0 0 2.6-2.6V7.4a2.6 2.6 0 0 0-2.6-2.6H7.4Zm9.8 1.8a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM12 7.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2Zm0 2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2Z",
+  },
+  {
+    name: "Tripadvisor",
+    href: "#",
+    viewBox: "0 0 24 24",
+    path: "M7.3 8.1A5 5 0 0 1 12 7a5 5 0 0 1 4.7 1.1l1.6-1.7h-4.4V4.1H10v2.3H5.7l1.6 1.7ZM7.6 17a3.3 3.3 0 1 0 0-6.6 3.3 3.3 0 0 0 0 6.6Zm8.8 0a3.3 3.3 0 1 0 0-6.6 3.3 3.3 0 0 0 0 6.6Zm-8.8-2.1a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Zm8.8 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4Z",
+  },
+];
+
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -20,10 +41,10 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:py-16">
-      <div className="mb-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Contact</p>
-        <h1 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">Plan a clean, easy trip</h1>
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
+      <div className="mb-8 sm:mb-10">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Contact</p>
+        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Plan a clean, easy trip</h1>
         <p className="text-foreground/65">Reach out with questions, special requests, or a tour idea you want shaped properly.</p>
       </div>
 
@@ -35,7 +56,7 @@ export default function ContactPage() {
               <p className="text-foreground/60">Thank you for reaching out. We&apos;ll get back to you within 24 hours.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-5 rounded-md border border-border bg-white p-6 shadow-sm">
+            <form onSubmit={handleSubmit} className="space-y-5 rounded-md border border-border bg-white p-4 shadow-sm sm:p-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-1">Name</label>
@@ -106,7 +127,7 @@ export default function ContactPage() {
         </div>
 
         <div className="space-y-6">
-          <div className="space-y-4 rounded-md border border-border bg-white p-6 shadow-sm">
+          <div className="space-y-4 rounded-md border border-border bg-white p-4 shadow-sm sm:p-6">
             <h2 className="text-lg font-semibold text-foreground">Get in Touch</h2>
             <div className="space-y-3 text-sm">
               <p className="text-foreground/70">
@@ -142,20 +163,20 @@ export default function ContactPage() {
             />
           </div>
 
-          <div className="rounded-md border border-border bg-white p-6 shadow-sm">
+          <div className="rounded-md border border-border bg-white p-4 shadow-sm sm:p-6">
             <h3 className="text-sm font-semibold text-foreground mb-3">Follow Us</h3>
-            <div className="flex gap-4">
-              {[
-                { name: "Facebook", href: "#" },
-                { name: "Instagram", href: "#" },
-                { name: "Tripadvisor", href: "#" },
-              ].map((social) => (
+            <div className="flex gap-3">
+              {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="text-sm text-foreground/60 hover:text-primary transition-colors"
+                  aria-label={social.name}
+                  title={social.name}
+                  className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-white text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary hover:text-white"
                 >
-                  {social.name}
+                  <svg viewBox={social.viewBox} className="h-5 w-5" aria-hidden="true">
+                    <path d={social.path} fill="currentColor" />
+                  </svg>
                 </a>
               ))}
             </div>
@@ -164,8 +185,8 @@ export default function ContactPage() {
       </div>
 
       {/* FAQ */}
-      <section id="faq" className="mt-16">
-        <h2 className="text-2xl font-semibold text-foreground mb-6">Frequently Asked Questions</h2>
+      <section id="faq" className="mt-14 sm:mt-16">
+        <h2 className="text-xl font-semibold text-foreground mb-6 sm:text-2xl">Frequently Asked Questions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {[
             { q: "How do I cancel or modify my booking?", a: "You can cancel or modify your booking up to 24 hours before the tour start time by contacting us directly." },
@@ -174,7 +195,7 @@ export default function ContactPage() {
             { q: "What should I bring on my tour?", a: "We recommend comfortable walking shoes, weather-appropriate clothing, and a camera. Specific requirements are listed on each tour page." },
           ].map((faq, i) => (
             <details key={i} className="group rounded-md border border-border bg-white p-5 shadow-sm">
-              <summary className="text-sm font-semibold text-foreground cursor-pointer list-none flex items-center justify-between">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold text-foreground">
                 {faq.q}
                 <span className="text-primary group-open:rotate-180 transition-transform">▼</span>
               </summary>

@@ -42,14 +42,14 @@ export default function ToursPage() {
   });
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:py-16">
-      <div className="mb-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Tours & activities</p>
-        <h1 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">Curated Victoria Falls experiences</h1>
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
+      <div className="mb-8 sm:mb-10">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Tours & activities</p>
+        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Curated Victoria Falls experiences</h1>
         <p className="max-w-2xl text-foreground/65">Clean booking, trusted guides, and thoughtfully selected tours around Victoria Falls, the Zambezi, Chobe, and town.</p>
       </div>
 
-      <div className="mb-8 space-y-4 rounded-md border border-border bg-white p-5 shadow-sm">
+      <div className="mb-8 space-y-4 rounded-md border border-border bg-white p-4 shadow-sm sm:p-5">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Category</label>

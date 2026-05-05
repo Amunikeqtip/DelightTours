@@ -22,20 +22,20 @@ export default function ReviewsPage() {
   });
 
   return (
-    <div className="mx-auto max-w-7xl px-5 py-12 sm:px-6 md:py-16">
-      <div className="mb-10">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Reviews</p>
-        <h1 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">Guest feedback</h1>
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
+      <div className="mb-8 sm:mb-10">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Reviews</p>
+        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Guest feedback</h1>
         <p className="text-foreground/65">Verified reviews from Tripadvisor and our travelers.</p>
       </div>
 
-      <div className="mb-8 flex flex-col items-center gap-6 rounded-md border border-border bg-white p-6 shadow-sm sm:flex-row">
+      <div className="mb-8 flex flex-col items-center gap-6 rounded-md border border-border bg-white p-4 shadow-sm sm:flex-row sm:p-6">
         <div className="text-center">
           <p className="text-5xl font-bold text-primary">4.8</p>
           <div className="mt-1 text-xl text-accent">★ ★ ★ ★ ★</div>
           <p className="text-sm text-foreground/50 mt-1">Based on 1,200+ reviews</p>
         </div>
-        <div className="flex-1 grid grid-cols-5 gap-2 max-w-md">
+        <div className="grid w-full max-w-md flex-1 grid-cols-5 gap-2">
           {[5, 4, 3, 2, 1].map((star) => (
             <div key={star} className="contents">
               <span className="text-sm text-foreground/60 text-right">{star}★</span>
@@ -51,8 +51,8 @@ export default function ReviewsPage() {
         </div>
       </div>
 
-      <div className="flex items-center gap-4 mb-6">
-        <span className="text-sm font-semibold text-foreground">Sort by:</span>
+      <div className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
+        <span className="w-full text-sm font-semibold text-foreground sm:w-auto">Sort by:</span>
         {(["rating", "date"] as const).map((option) => (
           <button
             key={option}
@@ -68,14 +68,14 @@ export default function ReviewsPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {sorted.map((review) => (
           <ReviewCard key={review.id} review={review} />
         ))}
       </div>
 
       <div className="mt-12 text-center">
-        <div className="inline-flex items-center gap-3 rounded-md border border-border bg-white px-6 py-4 shadow-sm">
+        <div className="inline-flex max-w-full items-center gap-3 rounded-md border border-border bg-white px-4 py-4 text-left shadow-sm sm:px-6">
           <PlatformIcons compact include={["Tripadvisor"]} />
           <div className="text-left">
             <p className="text-sm font-semibold text-foreground">Tripadvisor Recommended</p>

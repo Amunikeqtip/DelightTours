@@ -47,7 +47,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="soft-animated-surface border-t border-border">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-5 py-12 sm:px-6 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 sm:py-12 lg:grid-cols-4">
         <div>
           <Link href="/" className="mb-4 flex items-center gap-3">
             <Image
@@ -55,7 +55,7 @@ export default function Footer() {
               alt="Delight Tours & Travel"
               width={160}
               height={56}
-              className="h-12 w-auto object-contain object-left"
+              className="h-11 w-auto object-contain object-left sm:h-12"
             />
           </Link>
           <p className="text-sm leading-relaxed text-foreground/70">
@@ -66,10 +66,10 @@ export default function Footer() {
         {Object.entries(footerLinks).map(([title, links]) => (
           <div key={title}>
             <h4 className="mb-3 text-sm font-bold text-foreground">{title}</h4>
-            <ul className="space-y-2">
+            <ul className="grid grid-cols-2 gap-x-4 gap-y-2 sm:block sm:space-y-2">
               {links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm text-foreground/70 transition-colors hover:text-primary">
+                  <Link href={link.href} className="text-sm leading-6 text-foreground/70 transition-colors hover:text-primary">
                     {link.label}
                   </Link>
                 </li>
@@ -87,7 +87,7 @@ export default function Footer() {
                 href={social.href}
                 aria-label={social.name}
                 title={social.name}
-                className="flex h-10 w-10 items-center justify-center rounded-md border border-border bg-white text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary hover:text-white"
+                className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-white text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary hover:text-white sm:h-10 sm:w-10"
               >
                 <svg viewBox={social.viewBox} className="h-5 w-5" aria-hidden="true">
                   <path d={social.path} fill="currentColor" />
@@ -99,12 +99,12 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-4 sm:px-6 md:flex-row">
-          <p className="text-xs text-foreground/50">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-5 text-center sm:px-6 md:flex-row md:text-left">
+          <p className="text-xs leading-5 text-foreground/50">
             &copy; {new Date().getFullYear()} Delight Tours & Travel. All rights reserved.
           </p>
-          <div className="flex items-center gap-3 text-xs text-foreground/50">
-            <span>Powered by</span>
+          <div className="flex w-full flex-col items-center gap-2 text-xs text-foreground/50 sm:w-auto sm:flex-row sm:gap-3">
+            <span className="shrink-0">Powered by</span>
             <PlatformIcons compact />
           </div>
         </div>
