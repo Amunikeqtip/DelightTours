@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -26,26 +27,29 @@ export default function Navbar() {
           />
         </Link>
 
-        <ul className="hidden md:flex items-center gap-6 lg:gap-8">
-          {navLinks.map((link) => (
-            <li key={link.href}>
+        <div className="flex items-center gap-4">
+          <ul className="hidden md:flex items-center gap-6 lg:gap-8">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm font-medium text-foreground hover:text-primary transition-colors whitespace-nowrap"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li>
               <Link
-                href={link.href}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors whitespace-nowrap"
+                href="/booking"
+                className="inline-block bg-primary text-white text-sm font-semibold px-4 lg:px-5 py-2 rounded-full hover:bg-primary-dark transition-colors whitespace-nowrap"
               >
-                {link.label}
+                Book Now
               </Link>
             </li>
-          ))}
-          <li>
-            <Link
-              href="/booking"
-              className="inline-block bg-primary text-white text-sm font-semibold px-4 lg:px-5 py-2 rounded-full hover:bg-primary-dark transition-colors whitespace-nowrap"
-            >
-              Book Now
-            </Link>
-          </li>
-        </ul>
+          </ul>
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );

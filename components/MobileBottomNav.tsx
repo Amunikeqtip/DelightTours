@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home", icon: "pi pi-home" },
@@ -25,10 +24,6 @@ export default function MobileBottomNav() {
             <span>{link.label}</span>
           </Link>
         ))}
-        <div className="flex flex-col items-center gap-1 py-1 px-2 text-xs font-medium text-foreground/70">
-          <ThemeToggle />
-          <span>Theme</span>
-        </div>
       </div>
     </nav>
   );
