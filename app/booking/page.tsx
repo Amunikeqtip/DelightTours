@@ -3,14 +3,15 @@
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import PlatformIcons from "@/components/PlatformIcons";
 
 const tourOptions = [
-  { id: "1", title: "Golden Circle Day Tour", price: 129 },
-  { id: "2", title: "Northern Lights Expedition", price: 89 },
-  { id: "3", title: "Coastal Food & Wine Walk", price: 75 },
-  { id: "4", title: "Glacier Hiking Experience", price: 159 },
-  { id: "5", title: "City Highlights Bus Tour", price: 49 },
-  { id: "6", title: "Sunset Sailing Cruise", price: 95 },
+  { id: "1", title: "Victoria Falls Guided Tour", price: 65 },
+  { id: "2", title: "Zambezi Sunset Cruise", price: 85 },
+  { id: "3", title: "Chobe Day Safari", price: 175 },
+  { id: "4", title: "Falls Helicopter Flight", price: 160 },
+  { id: "5", title: "Village & Market Visit", price: 45 },
+  { id: "6", title: "Boma Dinner Experience", price: 70 },
 ];
 
 function BookingForm() {
@@ -46,7 +47,7 @@ function BookingForm() {
 
   if (submitted) {
     return (
-      <div className="max-w-2xl mx-auto px-6 py-24 text-center">
+      <div className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6 sm:py-24">
         <div className="text-6xl mb-6">✅</div>
         <h1 className="text-3xl font-bold text-foreground mb-4">Booking Confirmed!</h1>
         <p className="text-foreground/60 mb-2">
@@ -55,10 +56,7 @@ function BookingForm() {
         <p className="text-foreground/60 mb-8">
           A confirmation email has been sent to <strong>{form.email}</strong>.
         </p>
-        <Link
-          href="/"
-          className="inline-block bg-cta text-white text-base font-semibold px-8 py-3 rounded-full hover:bg-cta-hover transition-colors"
-        >
+        <Link href="/" className="inline-block rounded-md bg-cta px-8 py-3 text-base font-bold text-white transition-colors hover:bg-cta-hover">
           Back to Home
         </Link>
       </div>
@@ -66,14 +64,15 @@ function BookingForm() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 md:py-16">
-      <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Book Your Tour</h1>
-        <p className="text-foreground/60">Secure checkout powered by Bókun. Real-time availability.</p>
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
+      <div className="mb-8 sm:mb-10">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Booking</p>
+        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Book your tour</h1>
+        <p className="text-foreground/65">Send your details and we will confirm availability, timing, and final arrangements.</p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <form onSubmit={handleSubmit} className="lg:col-span-2 bg-white border border-border rounded-xl p-6 space-y-5">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <form onSubmit={handleSubmit} className="space-y-5 rounded-md border border-border bg-white p-4 shadow-sm sm:p-6 lg:col-span-2">
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-4">Select Tour</h2>
             <select
@@ -81,7 +80,7 @@ function BookingForm() {
               value={form.tourId}
               onChange={handleChange}
               required
-              className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
               <option value="">Choose a tour...</option>
               {tourOptions.map((t) => (
@@ -101,7 +100,7 @@ function BookingForm() {
                 value={form.date}
                 onChange={handleChange}
                 required
-                className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
             <div>
@@ -110,7 +109,7 @@ function BookingForm() {
                 name="guests"
                 value={form.guests}
                 onChange={handleChange}
-                className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
                   <option key={n} value={n}>{n} {n === 1 ? "Guest" : "Guests"}</option>
@@ -133,7 +132,7 @@ function BookingForm() {
                 onChange={handleChange}
                 required
                 placeholder="John Doe"
-                className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
             <div>
@@ -145,7 +144,7 @@ function BookingForm() {
                 onChange={handleChange}
                 required
                 placeholder="john@example.com"
-                className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
             </div>
           </div>
@@ -158,7 +157,7 @@ function BookingForm() {
               value={form.phone}
               onChange={handleChange}
               placeholder="+1 (555) 123-4567"
-              className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
           </div>
 
@@ -170,20 +169,20 @@ function BookingForm() {
               onChange={handleChange}
               rows={3}
               placeholder="Any dietary requirements, accessibility needs, etc."
-              className="w-full border border-border rounded-lg px-3 py-2.5 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+              className="w-full resize-none rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-cta text-white text-base font-semibold py-3 rounded-full hover:bg-cta-hover transition-colors disabled:opacity-60"
+            className="w-full rounded-md bg-cta py-3 text-base font-bold text-white transition-colors hover:bg-cta-hover disabled:opacity-60"
           >
             {loading ? "Processing..." : `Book Now — $${total}`}
           </button>
         </form>
 
-        <div className="bg-accent-cream border border-border rounded-xl p-6 h-fit">
+        <div className="h-fit rounded-md border border-border bg-accent-cream p-4 sm:p-6">
           <h2 className="text-lg font-semibold text-foreground mb-4">Booking Summary</h2>
           {selectedTour ? (
             <div className="space-y-3">
@@ -212,9 +211,10 @@ function BookingForm() {
             <p className="text-sm text-foreground/50">Select a tour to see summary</p>
           )}
           <div className="mt-4 pt-4 border-t border-border">
-            <p className="text-xs text-foreground/50 flex items-center gap-1">
-              🔒 Secure checkout powered by Bókun
-            </p>
+            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-xs text-foreground/50">Secure checkout powered by Bokun</p>
+              <PlatformIcons compact include={["Bokun"]} />
+            </div>
           </div>
         </div>
       </div>

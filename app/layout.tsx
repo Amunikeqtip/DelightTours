@@ -21,7 +21,7 @@ const openSans = Open_Sans({
 
 export const metadata: Metadata = {
   title: "Delight Tours & Travel",
-  description: "Discover unforgettable tours and travel experiences with Delight Tours & Travel.",
+  description: "Minimal, professional travel planning and guided tours around Victoria Falls.",
 };
 
 export default function RootLayout({

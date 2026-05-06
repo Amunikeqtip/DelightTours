@@ -4,17 +4,17 @@ import { useState } from "react";
 import TourCard, { Tour } from "@/components/TourCard";
 
 const allTours: Tour[] = [
-  { id: "1", title: "Golden Circle Day Tour", description: "Explore Iceland's most iconic sights including Gullfoss waterfall, Geysir geothermal area, and Þingvellir National Park.", price: 129, duration: "8 hours", rating: 4.8, reviewCount: 324, category: "Sightseeing" },
-  { id: "2", title: "Northern Lights Expedition", description: "Witness the magical Aurora Borealis on this guided night tour with hot cocoa and professional photography.", price: 89, duration: "4 hours", rating: 4.9, reviewCount: 218, category: "Adventure" },
-  { id: "3", title: "Coastal Food & Wine Walk", description: "Savor local flavors on a guided walking tour through the historic coastal district with 6 tasting stops.", price: 75, duration: "3 hours", rating: 4.7, reviewCount: 156, category: "Culinary" },
-  { id: "4", title: "Glacier Hiking Experience", description: "Scale the majestic glaciers of Vatnajökull with expert guides and all equipment provided.", price: 159, duration: "6 hours", rating: 4.9, reviewCount: 189, category: "Adventure" },
-  { id: "5", title: "City Highlights Bus Tour", description: "Comprehensive city tour covering all major landmarks, museums, and hidden gems.", price: 49, duration: "4 hours", rating: 4.5, reviewCount: 412, category: "Sightseeing" },
-  { id: "6", title: "Sunset Sailing Cruise", description: "Relax on a luxury catamaran with wine tasting and breathtaking sunset views over the harbor.", price: 95, duration: "2.5 hours", rating: 4.8, reviewCount: 267, category: "Culinary" },
-  { id: "7", title: "Mountain Bike Trail", description: "Challenging mountain biking adventure through scenic forest trails and mountain paths.", price: 69, duration: "5 hours", rating: 4.6, reviewCount: 98, category: "Adventure" },
-  { id: "8", title: "Historical Walking Tour", description: "Step back in time with a guided walk through the city's most historic neighborhoods and landmarks.", price: 35, duration: "2 hours", rating: 4.7, reviewCount: 301, category: "Sightseeing" },
+  { id: "1", title: "Victoria Falls Guided Tour", description: "Walk the rainforest trails with a local guide and see the falls from the most dramatic viewpoints.", price: 65, duration: "3 hours", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80", rating: 4.8, reviewCount: 324, category: "Sightseeing" },
+  { id: "2", title: "Zambezi Sunset Cruise", description: "Settle into an easy evening on the river with golden light, wildlife sightings, and refreshments on board.", price: 85, duration: "2.5 hours", image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80", rating: 4.9, reviewCount: 218, category: "River" },
+  { id: "3", title: "Chobe Day Safari", description: "Cross into Botswana for a full-day safari experience with game drives, river viewing, and lunch included.", price: 175, duration: "10 hours", image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80", rating: 4.7, reviewCount: 156, category: "Safari" },
+  { id: "4", title: "Falls Helicopter Flight", description: "Take in the Batoka Gorge and Victoria Falls from above on a short scenic flight.", price: 160, duration: "15 mins", image: "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80", rating: 4.9, reviewCount: 189, category: "Adventure" },
+  { id: "5", title: "Village & Market Visit", description: "Spend time with local hosts, browse craft markets, and learn the everyday stories behind the destination.", price: 45, duration: "4 hours", image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1200&q=80", rating: 4.5, reviewCount: 412, category: "Culture" },
+  { id: "6", title: "Boma Dinner Experience", description: "Enjoy an evening of regional food, live music, and warm hospitality after a day of exploring.", price: 70, duration: "3 hours", image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80", rating: 4.8, reviewCount: 267, category: "Culture" },
+  { id: "7", title: "Zambezi Canoe Trail", description: "A guided river paddle for adventurous travelers, with wildlife viewing from a quieter angle.", price: 115, duration: "5 hours", image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80", rating: 4.6, reviewCount: 98, category: "Adventure" },
+  { id: "8", title: "Private Airport Transfer", description: "A smooth arrival or departure with a private driver and clear communication from booking to drop-off.", price: 25, duration: "30 mins", image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80", rating: 4.7, reviewCount: 301, category: "Transfers" },
 ];
 
-const categories = ["All", "Sightseeing", "Adventure", "Culinary"];
+const categories = ["All", "Sightseeing", "River", "Safari", "Adventure", "Culture", "Transfers"];
 const durations = ["All", "Under 3h", "3-5h", "5h+"];
 const priceRanges = [
   { label: "All", min: 0, max: Infinity },
@@ -42,21 +42,21 @@ export default function ToursPage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12 md:py-16">
-      <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">Tours & Activities</h1>
-        <p className="text-foreground/60">Discover experiences powered by Bókun, Viator, and GetYourGuide.</p>
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
+      <div className="mb-8 sm:mb-10">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Tours & activities</p>
+        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Curated Victoria Falls experiences</h1>
+        <p className="max-w-2xl text-foreground/65">Clean booking, trusted guides, and thoughtfully selected tours around Victoria Falls, the Zambezi, Chobe, and town.</p>
       </div>
 
-      {/* Filters */}
-      <div className="bg-white border border-border rounded-xl p-5 mb-8 space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="mb-8 space-y-4 rounded-md border border-border bg-white p-4 shadow-sm sm:p-5">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
             <label className="block text-sm font-semibold text-foreground mb-2">Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full border border-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
               {categories.map((c) => (
                 <option key={c} value={c}>{c}</option>
@@ -68,7 +68,7 @@ export default function ToursPage() {
             <select
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              className="w-full border border-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
               {durations.map((d) => (
                 <option key={d} value={d}>{d}</option>
@@ -80,7 +80,7 @@ export default function ToursPage() {
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
-              className="w-full border border-border rounded-lg px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full rounded-md border border-border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
               {priceRanges.map((r) => (
                 <option key={r.label} value={r.label}>{r.label}</option>
@@ -93,7 +93,7 @@ export default function ToursPage() {
 
       {/* Tour Grid */}
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((tour) => (
             <TourCard key={tour.id} tour={tour} />
           ))}

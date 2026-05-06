@@ -12,12 +12,12 @@ export interface Review {
 
 export default function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="bg-white rounded-xl border border-border p-6 space-y-3">
+    <div className="space-y-3 rounded-md border border-border bg-white p-6 shadow-sm">
       <div className="flex items-center gap-3">
         {review.avatar ? (
           <Image src={review.avatar} alt={review.author} width={40} height={40} className="rounded-full" />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-accent-light flex items-center justify-center text-primary font-semibold">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-light font-semibold text-primary">
             {review.author.charAt(0)}
           </div>
         )}
@@ -27,7 +27,7 @@ export default function ReviewCard({ review }: { review: Review }) {
         </div>
       </div>
 
-      <div className="text-amber-500 text-sm">
+      <div className="text-sm text-accent">
         {"★".repeat(Math.round(review.rating))}{"☆".repeat(5 - Math.round(review.rating))}
       </div>
 
