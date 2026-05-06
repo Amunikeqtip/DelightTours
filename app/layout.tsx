@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${lato.variable} ${openSans.variable} dark`}>
+    <html lang="en" className={`${lato.variable} ${openSans.variable}`}>
       <body className="flex flex-col min-h-screen bg-background text-foreground antialiased">
         <ThemeProvider>
           <Navbar />
