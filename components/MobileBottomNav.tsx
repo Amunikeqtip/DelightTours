@@ -4,11 +4,11 @@ import Link from "next/link";
 import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
-  { href: "/", label: "Home", icon: "🏠" },
-  { href: "/tours", label: "Tours", icon: "🗺️" },
-  { href: "/booking", label: "Book", icon: "✈️" },
-  { href: "/reviews", label: "Reviews", icon: "⭐" },
-  { href: "/contact", label: "Contact", icon: "📞" },
+  { href: "/", label: "Home", icon: "pi pi-home" },
+  { href: "/tours", label: "Tours", icon: "pi pi-compass" },
+  { href: "/booking", label: "Book", icon: "pi pi-send" },
+  { href: "/reviews", label: "Reviews", icon: "pi pi-star" },
+  { href: "/contact", label: "Contact", icon: "pi pi-phone" },
 ];
 
 export default function MobileBottomNav() {
@@ -21,7 +21,7 @@ export default function MobileBottomNav() {
             href={link.href}
             className="flex flex-col items-center gap-1 py-1 px-2 text-xs font-medium text-foreground/70 hover:text-primary transition-colors"
           >
-            <span className="text-lg">{link.icon}</span>
+            <i className={`${link.icon} text-lg`}></i>
             <span>{link.label}</span>
           </Link>
         ))}

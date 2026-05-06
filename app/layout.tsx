@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lato, Open_Sans } from "next/font/google";
+import "primeicons/primeicons.css";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
