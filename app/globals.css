@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme inline {
+:root {
   --color-background: #FFFFFF;
   --color-foreground: #1E211A;
   --color-primary: #244734;
@@ -15,6 +15,44 @@
   --color-cta-hover: #A87124;
   --font-sans: var(--font-lato), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer utilities {
+  .bg-background { background-color: var(--color-background); }
+  .bg-foreground { background-color: var(--color-foreground); }
+  .bg-primary { background-color: var(--color-primary); }
+  .bg-accent { background-color: var(--color-accent); }
+  .bg-accent-light { background-color: var(--color-accent-light); }
+  .bg-accent-cream { background-color: var(--color-accent-cream); }
+  .bg-muted { background-color: var(--color-muted); }
+  .bg-cta { background-color: var(--color-cta); }
+  .bg-muted\/60 { background-color: color-mix(in srgb, var(--color-muted) 60%, transparent); }
+  .bg-primary-dark\/70 { background-color: color-mix(in srgb, var(--color-primary-dark) 70%, transparent); }
+
+  .text-foreground { color: var(--color-foreground); }
+  .text-primary { color: var(--color-primary); }
+  .text-primary-dark { color: var(--color-primary-dark); }
+  .text-accent { color: var(--color-accent); }
+  .text-accent-light { color: var(--color-accent-light); }
+  .text-foreground\/50 { color: color-mix(in srgb, var(--color-foreground) 50%, transparent); }
+  .text-foreground\/60 { color: color-mix(in srgb, var(--color-foreground) 60%, transparent); }
+  .text-foreground\/65 { color: color-mix(in srgb, var(--color-foreground) 65%, transparent); }
+  .text-foreground\/70 { color: color-mix(in srgb, var(--color-foreground) 70%, transparent); }
+  .text-foreground\/75 { color: color-mix(in srgb, var(--color-foreground) 75%, transparent); }
+
+  .border-border { border-color: var(--color-border); }
+  .border-primary { border-color: var(--color-primary); }
+  .from-background { --tw-gradient-from: var(--color-background) var(--tw-gradient-from-position); --tw-gradient-to: rgb(255 255 255 / 0) var(--tw-gradient-to-position); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+  .focus\:ring-primary\/30:focus { --tw-ring-color: color-mix(in srgb, var(--color-primary) 30%, transparent); }
+
+  .hover\:bg-primary:hover { background-color: var(--color-primary); }
+  .hover\:bg-muted:hover { background-color: var(--color-muted); }
+  .hover\:bg-accent:hover { background-color: var(--color-accent); }
+  .hover\:bg-accent-cream:hover { background-color: var(--color-accent-cream); }
+  .hover\:bg-cta-hover:hover { background-color: var(--color-cta-hover); }
+  .hover\:text-primary:hover { color: var(--color-primary); }
+  .hover\:text-primary-dark:hover { color: var(--color-primary-dark); }
+  .hover\:text-cta:hover { color: var(--color-cta); }
 }
 
 html {

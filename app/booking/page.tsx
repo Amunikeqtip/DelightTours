@@ -4,6 +4,7 @@ import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PlatformIcons from "@/components/PlatformIcons";
+import { BokunWidget } from "@/components/PartnerWidgets";
 
 const tourOptions = [
   { id: "1", title: "Victoria Falls Guided Tour", price: 65 },
@@ -218,6 +219,14 @@ function BookingForm() {
           </div>
         </div>
       </div>
+
+      <section className="mt-12">
+        <div className="mb-5">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Bokun</p>
+          <h2 className="text-xl font-bold text-foreground sm:text-2xl">Live booking widget</h2>
+        </div>
+        <BokunWidget />
+      </section>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import PlatformIcons from "@/components/PlatformIcons";
 import ReviewCard, { Review } from "@/components/ReviewCard";
+import { TripadvisorWidget } from "@/components/PartnerWidgets";
 
 const reviews: Review[] = [
   { id: "1", author: "Sarah M.", rating: 5, title: "Absolutely magical experience!", content: "The Northern Lights tour exceeded all expectations. Our guide was knowledgeable and the photos turned out amazing. Highly recommend booking with Delight Tours!", date: "March 2026", avatar: "" },
@@ -83,6 +84,14 @@ export default function ReviewsPage() {
           </div>
         </div>
       </div>
+
+      <section className="mt-12">
+        <div className="mb-5">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Tripadvisor</p>
+          <h2 className="text-xl font-bold text-foreground sm:text-2xl">Traveler rating widget</h2>
+        </div>
+        <TripadvisorWidget />
+      </section>
     </div>
   );
 }
