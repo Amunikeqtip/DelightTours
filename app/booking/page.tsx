@@ -5,6 +5,13 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import PlatformIcons from "@/components/PlatformIcons";
 import { BokunWidget } from "@/components/PartnerWidgets";
+import {
+  buildBookingFollowUpTemplate,
+  buildMailToLink,
+  buildQuickWhatsAppTemplate,
+  buildWhatsAppLink,
+  serviceProviderContact,
+} from "@/lib/clientMessageTemplates";
 
 const tourOptions = [
   { id: "1", title: "Victoria Falls Guided Tour", price: 65 },
@@ -47,6 +54,26 @@ function BookingForm() {
   };
 
   if (submitted) {
+    const messageDetails = {
+      clientName: form.name,
+      clientEmail: form.email,
+      clientPhone: form.phone,
+      serviceProviderName: serviceProviderContact.providerName,
+      platformName: serviceProviderContact.platformName,
+      tourOrServiceName: selectedTour?.title,
+      selectedServices: selectedTour ? [selectedTour.title] : [],
+      date: form.date,
+    };
+    const emailHref = buildMailToLink(
+      serviceProviderContact.email,
+      `Booking confirmation request for ${selectedTour?.title ?? "tour/service"}`,
+      buildBookingFollowUpTemplate(messageDetails),
+    );
+    const whatsappHref = buildWhatsAppLink(
+      serviceProviderContact.whatsappNumber,
+      buildQuickWhatsAppTemplate(messageDetails),
+    );
+
     return (
       <div className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6 sm:py-24">
         <div className="text-6xl mb-6">✅</div>
@@ -57,9 +84,28 @@ function BookingForm() {
         <p className="text-foreground/60 mb-8">
           A confirmation email has been sent to <strong>{form.email}</strong>.
         </p>
-        <Link href="/" className="inline-block rounded-md bg-cta px-8 py-3 text-base font-bold text-white transition-colors hover:bg-cta-hover">
-          Back to Home
-        </Link>
+        <div className="flex flex-col justify-center gap-3 sm:flex-row">
+          <Link
+            href={emailHref}
+            className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover"
+          >
+            Email Provider
+          </Link>
+          <Link
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-green-600"
+          >
+            WhatsApp Provider
+          </Link>
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center rounded-md border border-border bg-white px-6 py-3 text-sm font-bold text-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            Back to Home
+          </Link>
+        </div>
       </div>
     );
   }
