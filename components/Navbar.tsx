@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import ThemeToggle from "./ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -48,7 +47,6 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <ThemeToggle />
         </div>
       </div>
     </nav>

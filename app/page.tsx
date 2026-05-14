@@ -117,7 +117,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 md:py-24">
+      <section id="featured-tours" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 md:py-24">
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div>
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Featured tours</p>

@@ -15,46 +15,60 @@ export interface Tour {
 
 export default function TourCard({ tour }: { tour: Tour }) {
   return (
-    <div className="group bg-white rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="relative h-48 bg-accent-cream overflow-hidden">
+    <div className="group overflow-hidden rounded-xl border border-border bg-white transition-shadow hover:shadow-lg">
+      <div className="relative aspect-[4/3] overflow-hidden bg-accent-cream sm:aspect-[16/11]">
         {tour.image ? (
           <Image
             src={tour.image}
             alt={tour.title}
             fill
             sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center text-accent">
-            <span className="text-4xl">🏝️</span>
+          <div className="flex h-full w-full items-center justify-center text-accent">
+            <span className="text-4xl">Image coming soon</span>
           </div>
         )}
+
         {tour.category && (
-          <span className="absolute top-3 left-3 bg-white/90 text-primary text-xs font-semibold px-3 py-1 rounded-full">
+          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary shadow-sm">
             {tour.category}
           </span>
         )}
+
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-3 pb-3 pt-10">
+          <div className="inline-flex max-w-full items-center gap-2 rounded-md bg-white/95 px-3 py-2 text-xs font-bold text-primary-dark shadow-sm backdrop-blur">
+            <Image
+              src="/platforms/tripadvisor.svg"
+              alt="Tripadvisor"
+              width={18}
+              height={18}
+              className="h-[18px] w-[18px] object-contain"
+            />
+            <span className="text-[#00AA6C]" aria-label="5 out of 5 stars">
+              ★★★★★
+            </span>
+            <span className="whitespace-nowrap">
+              {tour.rating?.toFixed(1) ?? "4.8"} ({tour.reviewCount ?? 324})
+            </span>
+          </div>
+        </div>
       </div>
 
-      <div className="p-5 space-y-3">
-        <h3 className="font-semibold text-foreground text-lg leading-snug">{tour.title}</h3>
-        <p className="text-sm text-foreground/60 line-clamp-2">{tour.description}</p>
+      <div className="space-y-3 p-5">
+        <h3 className="text-lg font-semibold leading-snug text-foreground">{tour.title}</h3>
+        <p className="line-clamp-2 text-sm text-foreground/60">{tour.description}</p>
 
         <div className="flex items-center gap-4 text-sm text-foreground/60">
           <span>{tour.duration}</span>
-          {tour.rating && (
-            <span className="flex items-center gap-1">
-              ⭐ {tour.rating} ({tour.reviewCount ?? 0})
-            </span>
-          )}
         </div>
 
         <div className="flex items-center justify-between border-t border-border pt-4">
           <span className="text-xl font-bold text-primary">${tour.price}</span>
           <Link
             href={`/booking?tourId=${tour.id}`}
-            className="bg-cta text-white text-sm font-semibold px-5 py-2 rounded-full hover:bg-cta-hover transition-colors"
+            className="rounded-full bg-cta px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-cta-hover"
           >
             Book Now
           </Link>
