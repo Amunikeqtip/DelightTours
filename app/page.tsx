@@ -62,37 +62,37 @@ export default function Home() {
         <div className="relative z-10 mx-auto flex min-h-[calc(100svh-112px)] w-full max-w-7xl flex-col justify-end px-4 pb-8 pt-16 sm:min-h-[calc(100vh-128px)] sm:px-6 sm:pb-10 lg:pt-24">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
             <div className="max-w-4xl">
-              <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-border bg-background/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-accent-light backdrop-blur">
+              <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-accent-light backdrop-blur">
                 <span className="h-2 w-2 rounded-full bg-accent" />
                 Victoria Falls Experiences
               </div>
-              <h1 className="max-w-4xl text-4xl font-bold leading-[1.03] text-foreground sm:text-6xl lg:text-7xl">
+              <h1 className="max-w-4xl text-4xl font-bold leading-[1.03] text-white sm:text-6xl lg:text-7xl">
                 Curated tours around the Falls, planned with local precision.
               </h1>
-              <p className="mt-5 max-w-2xl text-base leading-7 text-foreground/75 sm:text-lg sm:leading-8">
+              <p className="mt-5 max-w-2xl text-base leading-7 text-white/78 sm:text-lg sm:leading-8">
                 Guided rainforest walks, Zambezi cruises, safari day trips, and smooth transfers built around clear timing, warm service, and beautiful places.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/booking"
-                  className="inline-flex items-center justify-center rounded-md bg-cta px-7 py-3 text-sm font-bold text-white shadow-lg shadow-foreground/15 transition-colors hover:bg-cta-hover"
+                  className="inline-flex items-center justify-center rounded-md bg-cta px-7 py-3 text-sm font-bold text-white shadow-lg shadow-black/20 transition-colors hover:bg-cta-hover"
                 >
                   Start Booking
                 </Link>
                 <Link
                   href="#featured-tours"
-                  className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-7 py-3 text-sm font-bold text-foreground backdrop-blur transition-colors hover:bg-background/20"
+                  className="inline-flex items-center justify-center rounded-md border border-white/35 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur transition-colors hover:bg-white/20"
                 >
                   Explore Tours
                 </Link>
               </div>
             </div>
 
-            <div className="rounded-lg border border-border bg-background/10 p-4 shadow-2xl shadow-foreground/10 backdrop-blur-md sm:p-5">
-              <div className="flex items-start justify-between gap-4 border-b border-border pb-4">
+            <div className="rounded-lg border border-white/15 bg-white/10 p-4 shadow-2xl shadow-black/20 backdrop-blur-md sm:p-5">
+              <div className="flex items-start justify-between gap-4 border-b border-white/15 pb-4">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/50">Today&apos;s pick</p>
-                  <h2 className="mt-2 text-xl font-bold text-foreground">Zambezi Sunset Cruise</h2>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/55">Today&apos;s pick</p>
+                  <h2 className="mt-2 text-xl font-bold text-white">Zambezi Sunset Cruise</h2>
                 </div>
                 <p className="rounded-md bg-accent px-2.5 py-1 text-xs font-bold text-primary-dark">4.9</p>
               </div>
@@ -103,29 +103,29 @@ export default function Home() {
                   ["218", "Reviews"],
                 ].map(([value, label]) => (
                   <div key={label}>
-                    <p className="text-xl font-bold text-foreground">{value}</p>
-                    <p className="mt-1 text-xs text-foreground/50">{label}</p>
+                    <p className="text-xl font-bold text-white">{value}</p>
+                    <p className="mt-1 text-xs text-white/55">{label}</p>
                   </div>
                 ))}
               </div>
               <Link
                 href="/booking?tourId=2"
-                className="inline-flex w-full items-center justify-center rounded-md bg-background px-4 py-3 text-sm font-bold text-primary-dark transition-colors hover:bg-accent-light"
+                className="inline-flex w-full items-center justify-center rounded-md bg-white px-4 py-3 text-sm font-bold text-primary-dark transition-colors hover:bg-accent-light"
               >
                 Reserve this tour
               </Link>
             </div>
           </div>
 
-          <div className="mt-10 grid gap-3 border-t border-border pt-5 text-foreground/75 sm:grid-cols-3 lg:max-w-3xl">
+          <div className="mt-10 grid gap-3 border-t border-white/15 pt-5 text-white/80 sm:grid-cols-3 lg:max-w-3xl">
             {[
               ["4.8/5", "Guest rating"],
               ["1,200+", "Happy travelers"],
               ["24h", "Fast confirmations"],
             ].map(([value, label]) => (
-              <div key={label} className="rounded-md bg-background/5 px-4 py-3 backdrop-blur">
-                <p className="text-2xl font-bold text-foreground">{value}</p>
-                <p className="mt-1 text-sm text-foreground/60">{label}</p>
+              <div key={label} className="rounded-md bg-white/5 px-4 py-3 backdrop-blur">
+                <p className="text-2xl font-bold text-white">{value}</p>
+                <p className="mt-1 text-sm text-white/62">{label}</p>
               </div>
             ))}
           </div>

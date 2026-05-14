@@ -42,10 +42,10 @@ export default function ReviewsPage() {
         />
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:text-sm">Reviews</p>
-          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">
+          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
             Guest feedback with real booking context.
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-foreground/70">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/72">
             Verified reviews from Tripadvisor and travelers who booked through our supported tour workflows.
           </p>
         </div>

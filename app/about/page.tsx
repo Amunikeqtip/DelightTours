@@ -22,10 +22,10 @@ export default function AboutPage() {
         />
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent-light">About Delight</p>
-          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">
+          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">
             Local travel, handled with care and clarity.
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-foreground/70">
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/72">
             A Victoria Falls travel team focused on clean communication, reliable partners, and experiences that feel personal without becoming complicated.
           </p>
         </div>

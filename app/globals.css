@@ -47,6 +47,11 @@ html.light {
   .bg-cta { background-color: var(--color-cta); }
   .bg-muted\/60 { background-color: color-mix(in srgb, var(--color-muted) 60%, transparent); }
   .bg-primary-dark\/70 { background-color: color-mix(in srgb, var(--color-primary-dark) 70%, transparent); }
+  .bg-background\/5 { background-color: color-mix(in srgb, var(--color-background) 5%, transparent); }
+  .bg-background\/10 { background-color: color-mix(in srgb, var(--color-background) 10%, transparent); }
+  .bg-background\/20 { background-color: color-mix(in srgb, var(--color-background) 20%, transparent); }
+  .bg-background\/90 { background-color: color-mix(in srgb, var(--color-background) 90%, transparent); }
+  .bg-background\/95 { background-color: color-mix(in srgb, var(--color-background) 95%, transparent); }
 
   .text-foreground { color: var(--color-foreground); }
   .text-primary { color: var(--color-primary); }
