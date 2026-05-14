@@ -102,8 +102,8 @@ export default function ClientInquiryModal({ channel, onClose }: ClientInquiryMo
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-black/55 px-3 py-4 sm:items-center sm:px-6">
-      <div className="max-h-[calc(100svh-2rem)] w-full max-w-2xl overflow-y-auto rounded-md border border-border bg-white shadow-2xl">
+    <div className="fixed inset-0 z-[70] flex items-end justify-center bg-background/55 px-3 py-4 sm:items-center sm:px-6">
+      <div className="max-h-[calc(100svh-2rem)] w-full max-w-2xl overflow-y-auto rounded-md border border-border bg-background shadow-2xl">
         <div className="flex items-start justify-between gap-4 border-b border-border px-4 py-4 sm:px-6">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{title}</p>

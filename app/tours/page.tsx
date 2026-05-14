@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import TourCard, { Tour } from "@/components/TourCard";
 
 const allTours: Tour[] = [
-  { id: "1", title: "Victoria Falls Guided Tour", description: "Walk the rainforest trails with a local guide and see the falls from the most dramatic viewpoints.", price: 65, duration: "3 hours", image: "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80", rating: 4.8, reviewCount: 324, category: "Sightseeing" },
-  { id: "2", title: "Zambezi Sunset Cruise", description: "Settle into an easy evening on the river with golden light, wildlife sightings, and refreshments on board.", price: 85, duration: "2.5 hours", image: "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80", rating: 4.9, reviewCount: 218, category: "River" },
+  { id: "1", title: "Victoria Falls Guided Tour", description: "Walk the rainforest trails with a local guide and see the falls from the most dramatic viewpoints.", price: 65, duration: "3 hours", image: "/tours/victoria-falls-guided-tour.jpg", rating: 4.8, reviewCount: 324, category: "Sightseeing" },
+  { id: "2", title: "Zambezi Sunset Cruise", description: "Settle into an easy evening on the river with golden light, wildlife sightings, and refreshments on board.", price: 85, duration: "2.5 hours", image: "/tours/zambezi-sunset-cruise.jpg", rating: 4.9, reviewCount: 218, category: "River" },
   { id: "3", title: "Chobe Day Safari", description: "Cross into Botswana for a full-day safari experience with game drives, river viewing, and lunch included.", price: 175, duration: "10 hours", image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80", rating: 4.7, reviewCount: 156, category: "Safari" },
   { id: "4", title: "Falls Helicopter Flight", description: "Take in the Batoka Gorge and Victoria Falls from above on a short scenic flight.", price: 160, duration: "15 mins", image: "https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?auto=format&fit=crop&w=1200&q=80", rating: 4.9, reviewCount: 189, category: "Adventure" },
   { id: "5", title: "Village & Market Visit", description: "Spend time with local hosts, browse craft markets, and learn the everyday stories behind the destination.", price: 45, duration: "4 hours", image: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&fit=crop&w=1200&q=80", rating: 4.5, reviewCount: 412, category: "Culture" },
@@ -42,17 +43,35 @@ export default function ToursPage() {
   });
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
-      <div className="mb-8 sm:mb-10">
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Tours & activities</p>
-        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Curated Victoria Falls experiences</h1>
-        <p className="max-w-2xl text-foreground/65">Clean booking, trusted guides, and thoughtfully selected tours around Victoria Falls, the Zambezi, Chobe, and town.</p>
-      </div>
+    <div className="bg-background text-foreground">
+      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 md:py-24">
+        <Image
+          src="/tours/zambezi-sunset-cruise.jpg"
+          alt="Zambezi sunset cruise"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(90deg, color-mix(in srgb, #0d1210 92%, transparent) 0%, color-mix(in srgb, #0d1210 72%, transparent) 52%, color-mix(in srgb, #0d1210 42%, transparent) 100%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:text-sm">Tours & activities</p>
+          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">Curated Victoria Falls experiences</h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-foreground/70">Clean booking, trusted guides, and thoughtfully selected tours around Victoria Falls, the Zambezi, Chobe, and town.</p>
+        </div>
+      </section>
 
-      <div className="mb-8 space-y-4 rounded-md border border-border bg-white p-4 shadow-sm sm:p-5">
+      <section className="bg-accent-cream px-4 py-10 text-foreground sm:px-6 md:py-14">
+        <div className="mx-auto max-w-7xl">
+      <div className="mb-8 space-y-4 rounded-lg border border-border bg-background p-4 shadow-sm sm:p-5">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Category</label>
+            <label className="mb-2 block text-sm font-semibold text-foreground">Category</label>
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
@@ -64,7 +83,7 @@ export default function ToursPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Duration</label>
+            <label className="mb-2 block text-sm font-semibold text-foreground">Duration</label>
             <select
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
@@ -76,7 +95,7 @@ export default function ToursPage() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-semibold text-foreground mb-2">Price</label>
+            <label className="mb-2 block text-sm font-semibold text-foreground">Price</label>
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
@@ -91,7 +110,6 @@ export default function ToursPage() {
         <p className="text-sm text-foreground/50">{filtered.length} tour{filtered.length !== 1 ? "s" : ""} found</p>
       </div>
 
-      {/* Tour Grid */}
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((tour) => (
@@ -99,7 +117,7 @@ export default function ToursPage() {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 text-foreground/50">
+        <div className="py-16 text-center text-foreground/50">
           <p className="text-lg">No tours match your filters.</p>
           <button
             onClick={() => { setCategory("All"); setDuration("All"); setPriceRange("All"); }}
@@ -109,6 +127,8 @@ export default function ToursPage() {
           </button>
         </div>
       )}
+        </div>
+      </section>
     </div>
   );
 }

@@ -9,7 +9,7 @@ const footerLinks = {
     { href: "/booking", label: "Book Now" },
     { href: "/about", label: "About Us" },
   ],
-  "Support": [
+  Support: [
     { href: "/contact", label: "Contact" },
     { href: "/contact#faq", label: "FAQ" },
     { href: "/contact#terms", label: "Terms & Conditions" },
@@ -31,12 +31,6 @@ const socialLinks = [
     path: "M7.4 2.8h9.2c2.5 0 4.6 2.1 4.6 4.6v9.2c0 2.5-2.1 4.6-4.6 4.6H7.4a4.6 4.6 0 0 1-4.6-4.6V7.4c0-2.5 2.1-4.6 4.6-4.6Zm0 2A2.6 2.6 0 0 0 4.8 7.4v9.2a2.6 2.6 0 0 0 2.6 2.6h9.2a2.6 2.6 0 0 0 2.6-2.6V7.4a2.6 2.6 0 0 0-2.6-2.6H7.4Zm9.8 1.8a1.3 1.3 0 1 1 0 2.6 1.3 1.3 0 0 1 0-2.6ZM12 7.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2Zm0 2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2Z",
   },
   {
-    name: "X",
-    href: "#",
-    viewBox: "0 0 24 24",
-    path: "M13.9 10.5 21.3 2h-1.8l-6.4 7.4L8 2H2l7.8 11.4L2 22h1.8l6.8-7.8L16 22h6l-8.1-11.5Zm-2.4 2.8-.8-1.1L4.4 3.3h2.8l5 7.1.8 1.1 6.6 9.3h-2.8l-5.3-7.5Z",
-  },
-  {
     name: "Tripadvisor",
     href: "#",
     viewBox: "0 0 24 24",
@@ -46,10 +40,12 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="soft-animated-surface border-t border-border">
+    <footer
+      className="border-t border-border bg-background text-foreground"
+    >
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 sm:py-12 lg:grid-cols-4">
         <div>
-          <Link href="/" className="mb-4 flex items-center gap-3">
+          <Link href="/" className="mb-4 inline-flex rounded-md bg-white px-2 py-1">
             <Image
               src="/delighttoursandtravel.png"
               alt="Delight Tours & Travel"
@@ -58,8 +54,8 @@ export default function Footer() {
               className="h-11 w-auto object-contain object-left sm:h-12"
             />
           </Link>
-          <p className="text-sm leading-relaxed text-foreground/70">
-            Minimal, professional travel planning for Victoria Falls and the wider region.
+          <p className="text-sm leading-relaxed text-foreground/60">
+            Local, image-rich travel planning for Victoria Falls and the wider region.
           </p>
         </div>
 
@@ -69,7 +65,7 @@ export default function Footer() {
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 sm:block sm:space-y-2">
               {links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-sm leading-6 text-foreground/70 transition-colors hover:text-primary">
+                  <Link href={link.href} className="text-sm leading-6 text-foreground/60 transition-colors hover:text-accent-light">
                     {link.label}
                   </Link>
                 </li>
@@ -87,7 +83,7 @@ export default function Footer() {
                 href={social.href}
                 aria-label={social.name}
                 title={social.name}
-                className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-white text-primary shadow-sm transition-colors hover:border-primary hover:bg-primary hover:text-white sm:h-10 sm:w-10"
+                className="flex h-11 w-11 items-center justify-center rounded-md border border-border bg-background/10 text-foreground shadow-sm transition-colors hover:border-accent-light hover:bg-accent hover:text-white sm:h-10 sm:w-10"
               >
                 <svg viewBox={social.viewBox} className="h-5 w-5" aria-hidden="true">
                   <path d={social.path} fill="currentColor" />
@@ -100,10 +96,10 @@ export default function Footer() {
 
       <div className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 py-5 text-center sm:px-6 md:flex-row md:text-left">
-          <p className="text-xs leading-5 text-foreground/50">
+          <p className="text-xs leading-5 text-foreground/45">
             &copy; {new Date().getFullYear()} Delight Tours & Travel. All rights reserved.
           </p>
-          <div className="flex w-full flex-col items-center gap-2 text-xs text-foreground/50 sm:w-auto sm:flex-row sm:gap-3">
+          <div className="flex w-full flex-col items-center gap-2 text-xs text-foreground/45 sm:w-auto sm:flex-row sm:gap-3">
             <span className="shrink-0">Powered by</span>
             <PlatformIcons compact />
           </div>

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export interface Review {
   id: string;
   author: string;
@@ -7,32 +5,26 @@ export interface Review {
   title: string;
   content: string;
   date: string;
-  avatar?: string;
+  avatar: string;
 }
 
 export default function ReviewCard({ review }: { review: Review }) {
   return (
-    <div className="space-y-3 rounded-md border border-border bg-white p-6 shadow-sm">
-      <div className="flex items-center gap-3">
-        {review.avatar ? (
-          <Image src={review.avatar} alt={review.author} width={40} height={40} className="rounded-full" />
-        ) : (
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent-light font-semibold text-primary">
+    <div className="group rounded-xl border border-border bg-background/10 p-5 shadow-sm backdrop-blur transition-all hover:shadow-md sm:p-6">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-accent-light text-sm font-bold text-accent">
             {review.author.charAt(0)}
           </div>
-        )}
-        <div>
-          <p className="text-sm font-semibold text-foreground">{review.author}</p>
-          <p className="text-xs text-foreground/50">{review.date}</p>
+          <div>
+            <p className="text-sm font-semibold text-foreground">{review.author}</p>
+            <p className="text-xs text-foreground/45">{review.date}</p>
+          </div>
         </div>
+        <div className="text-accent text-sm tracking-wide">{"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)}</div>
       </div>
-
-      <div className="text-sm text-accent">
-        {"★".repeat(Math.round(review.rating))}{"☆".repeat(5 - Math.round(review.rating))}
-      </div>
-
-      <h4 className="text-sm font-semibold text-foreground">{review.title}</h4>
-      <p className="text-sm text-foreground/70 leading-relaxed line-clamp-4">{review.content}</p>
+      <h3 className="mt-4 text-base font-bold text-foreground">{review.title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-foreground/65">{review.content}</p>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import PlatformIcons from "@/components/PlatformIcons";
 import { BokunWidget } from "@/components/PartnerWidgets";
 import {
@@ -75,203 +76,146 @@ function BookingForm() {
     );
 
     return (
-      <div className="mx-auto max-w-2xl px-4 py-20 text-center sm:px-6 sm:py-24">
-        <div className="text-6xl mb-6">✅</div>
-        <h1 className="text-3xl font-bold text-foreground mb-4">Booking Confirmed!</h1>
-        <p className="text-foreground/60 mb-2">
-          Thank you, {form.name}. Your booking for <strong>{selectedTour?.title}</strong> has been received.
-        </p>
-        <p className="text-foreground/60 mb-8">
-          A confirmation email has been sent to <strong>{form.email}</strong>.
-        </p>
-        <div className="flex flex-col justify-center gap-3 sm:flex-row">
-          <Link
-            href={emailHref}
-            className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover"
-          >
-            Email Provider
-          </Link>
-          <Link
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-md bg-green-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-green-600"
-          >
-            WhatsApp Provider
-          </Link>
-          <Link
-            href="/"
-            className="inline-flex items-center justify-center rounded-md border border-border bg-white px-6 py-3 text-sm font-bold text-foreground transition-colors hover:border-primary hover:text-primary"
-          >
-            Back to Home
-          </Link>
+      <div className="bg-background px-4 py-20 text-center text-foreground sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-2xl rounded-lg border border-border bg-background/10 p-8 shadow-sm backdrop-blur">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-2xl font-bold text-primary-dark">✓</div>
+          <h1 className="mb-4 text-3xl font-bold text-foreground">Booking received</h1>
+          <p className="mb-2 text-foreground/60">
+            Thank you, {form.name}. Your booking for <strong>{selectedTour?.title}</strong> has been received.
+          </p>
+          <p className="mb-8 text-foreground/60">
+            A confirmation email has been sent to <strong>{form.email}</strong>.
+          </p>
+          <div className="flex flex-col justify-center gap-3 sm:flex-row">
+            <Link href={emailHref} className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
+              Email Provider
+            </Link>
+            <Link href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
+              WhatsApp Provider
+            </Link>
+            <Link href="/" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
+              Back to Home
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-12 md:py-16">
-      <div className="mb-8 sm:mb-10">
-        <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-sm">Booking</p>
-        <h1 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Book your tour</h1>
-        <p className="text-foreground/65">Send your details and we will confirm availability, timing, and final arrangements.</p>
-      </div>
+    <div className="bg-background text-foreground">
+      <section className="relative isolate overflow-hidden px-4 py-16 sm:px-6 md:py-24">
+        <Image
+          src="/tours/zambezi-sunset-cruise.jpg"
+          alt="Zambezi sunset cruise"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(90deg, color-mix(in srgb, #0d1210 92%, transparent) 0%, color-mix(in srgb, #0d1210 74%, transparent) 55%, color-mix(in srgb, #0d1210 45%, transparent) 100%)",
+          }}
+        />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:text-sm">Booking</p>
+          <h1 className="max-w-3xl text-4xl font-bold leading-tight text-foreground sm:text-5xl md:text-6xl">Book your tour with a cleaner flow.</h1>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-foreground/70">Send your details and we will confirm availability, timing, and final arrangements.</p>
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <form onSubmit={handleSubmit} className="space-y-5 rounded-md border border-border bg-white p-4 shadow-sm sm:p-6 lg:col-span-2">
-          <div>
-            <h2 className="text-lg font-semibold text-foreground mb-4">Select Tour</h2>
-            <select
-              name="tourId"
-              value={form.tourId}
-              onChange={handleChange}
-              required
-              className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-            >
-              <option value="">Choose a tour...</option>
-              {tourOptions.map((t) => (
-                <option key={t.id} value={t.id}>
-                  {t.title} — ${t.price}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:py-16">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          <form onSubmit={handleSubmit} className="space-y-5 rounded-lg border border-border bg-background/10 p-4 shadow-sm backdrop-blur sm:p-6 lg:col-span-2">
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-1">Date</label>
-              <input
-                type="date"
-                name="date"
-                value={form.date}
-                onChange={handleChange}
-                required
-                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1">Guests</label>
-              <select
-                name="guests"
-                value={form.guests}
-                onChange={handleChange}
-                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              >
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                  <option key={n} value={n}>{n} {n === 1 ? "Guest" : "Guests"}</option>
+              <h2 className="mb-4 text-lg font-semibold text-foreground">Select tour</h2>
+              <select name="tourId" value={form.tourId} onChange={handleChange} required className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40">
+                <option value="">Choose a tour...</option>
+                {tourOptions.map((t) => (
+                  <option key={t.id} value={t.id}>{t.title} - ${t.price}</option>
                 ))}
               </select>
             </div>
-          </div>
 
-          <div className="pt-4 border-t border-border">
-            <h2 className="text-lg font-semibold text-foreground mb-4">Your Details</h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1">Full Name</label>
-              <input
-                type="text"
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                required
-                placeholder="John Doe"
-                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-foreground mb-1">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                required
-                placeholder="john@example.com"
-                className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-1">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              value={form.phone}
-              onChange={handleChange}
-              placeholder="+1 (555) 123-4567"
-              className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-semibold text-foreground mb-1">Special Requests</label>
-            <textarea
-              name="notes"
-              value={form.notes}
-              onChange={handleChange}
-              rows={3}
-              placeholder="Any dietary requirements, accessibility needs, etc."
-              className="w-full resize-none rounded-md border border-border bg-background px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full rounded-md bg-cta py-3 text-base font-bold text-white transition-colors hover:bg-cta-hover disabled:opacity-60"
-          >
-            {loading ? "Processing..." : `Book Now — $${total}`}
-          </button>
-        </form>
-
-        <div className="h-fit rounded-md border border-border bg-accent-cream p-4 sm:p-6">
-          <h2 className="text-lg font-semibold text-foreground mb-4">Booking Summary</h2>
-          {selectedTour ? (
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <p className="text-sm text-foreground/60">Tour</p>
-                <p className="font-semibold text-foreground">{selectedTour.title}</p>
+                <label className="mb-1 block text-sm font-semibold text-foreground">Date</label>
+                <input type="date" name="date" value={form.date} onChange={handleChange} required className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40" />
               </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-foreground/60">Date</span>
-                <span className="text-sm text-foreground">{form.date || "—"}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-foreground/60">Guests</span>
-                <span className="text-sm text-foreground">{form.guests}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sm text-foreground/60">Price per person</span>
-                <span className="text-sm text-foreground">${selectedTour.price}</span>
-              </div>
-              <div className="pt-3 border-t border-border flex justify-between">
-                <span className="font-semibold text-foreground">Total</span>
-                <span className="font-bold text-primary text-lg">${total}</span>
+              <div>
+                <label className="mb-1 block text-sm font-semibold text-foreground">Guests</label>
+                <select name="guests" value={form.guests} onChange={handleChange} className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40">
+                  {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+                    <option key={n} value={n}>{n} {n === 1 ? "Guest" : "Guests"}</option>
+                  ))}
+                </select>
               </div>
             </div>
-          ) : (
-            <p className="text-sm text-foreground/50">Select a tour to see summary</p>
-          )}
-          <div className="mt-4 pt-4 border-t border-border">
-            <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-xs text-foreground/50">Secure checkout powered by Bokun</p>
-              <PlatformIcons compact include={["Bokun"]} />
+
+            <div className="border-t border-border pt-4">
+              <h2 className="mb-4 text-lg font-semibold text-foreground">Your details</h2>
+            </div>
+
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <label className="mb-1 block text-sm font-semibold text-foreground">Full Name</label>
+                <input type="text" name="name" value={form.name} onChange={handleChange} required placeholder="John Doe" className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40" />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm font-semibold text-foreground">Email</label>
+                <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="john@example.com" className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-foreground">Phone</label>
+              <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="+263 00 000 0000" className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40" />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-semibold text-foreground">Special requests</label>
+              <textarea name="notes" value={form.notes} onChange={handleChange} rows={3} placeholder="Any dietary requirements, accessibility needs, etc." className="w-full resize-none rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40" />
+            </div>
+
+            <button type="submit" disabled={loading} className="w-full rounded-md bg-cta py-3 text-base font-bold text-white transition-colors hover:bg-cta-hover disabled:opacity-60">
+              {loading ? "Processing..." : `Book Now - $${total}`}
+            </button>
+          </form>
+
+          <div className="h-fit rounded-lg border border-border bg-background/10 p-4 shadow-sm backdrop-blur sm:p-6">
+            <h2 className="mb-4 text-lg font-semibold text-foreground">Booking summary</h2>
+            {selectedTour ? (
+              <div className="space-y-3">
+                <div>
+                  <p className="text-sm text-foreground/50">Tour</p>
+                  <p className="font-semibold text-foreground">{selectedTour.title}</p>
+                </div>
+                <div className="flex justify-between"><span className="text-sm text-foreground/50">Date</span><span className="text-sm text-foreground">{form.date || "-"}</span></div>
+                <div className="flex justify-between"><span className="text-sm text-foreground/50">Guests</span><span className="text-sm text-foreground">{form.guests}</span></div>
+                <div className="flex justify-between"><span className="text-sm text-foreground/50">Price per person</span><span className="text-sm text-foreground">${selectedTour.price}</span></div>
+                <div className="flex justify-between border-t border-border pt-3"><span className="font-semibold text-foreground">Total</span><span className="text-lg font-bold text-accent">${total}</span></div>
+              </div>
+            ) : (
+              <p className="text-sm text-foreground/50">Select a tour to see summary</p>
+            )}
+            <div className="mt-4 border-t border-border pt-4">
+              <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-xs text-foreground/50">Secure checkout powered by Bokun</p>
+                <PlatformIcons compact include={["Bokun"]} />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <section className="mt-12">
-        <div className="mb-5">
-          <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent">Bokun</p>
-          <h2 className="text-xl font-bold text-foreground sm:text-2xl">Live booking widget</h2>
-        </div>
-        <BokunWidget />
+        <section className="mt-12">
+          <div className="mb-5">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Bokun</p>
+            <h2 className="text-xl font-bold text-foreground sm:text-2xl">Live booking widget</h2>
+          </div>
+          <BokunWidget />
+        </section>
       </section>
     </div>
   );
@@ -279,7 +223,7 @@ function BookingForm() {
 
 export default function BookingPage() {
   return (
-    <Suspense fallback={<div className="flex justify-center items-center min-h-[400px]">Loading...</div>}>
+    <Suspense fallback={<div className="flex min-h-[400px] items-center justify-center bg-background text-foreground">Loading...</div>}>
       <BookingForm />
     </Suspense>
   );

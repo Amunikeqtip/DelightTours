@@ -46,7 +46,7 @@ function PlatformLogo({
       className={
         compact
           ? "flex h-8 items-center justify-center"
-          : "flex h-11 min-w-0 flex-1 items-center justify-center rounded-md border border-border bg-white px-3 py-2 shadow-sm sm:h-12 sm:flex-none sm:px-4"
+          : "flex h-11 min-w-0 flex-1 items-center justify-center rounded-md border border-border bg-background px-3 py-2 shadow-sm sm:h-12 sm:flex-none sm:px-4"
       }
       title={platform.name}
     >
@@ -55,7 +55,7 @@ function PlatformLogo({
         alt={platform.name}
         width={platform.width}
         height={platform.height}
-        className={compact ? "h-5 w-auto object-contain sm:h-6" : "max-h-6 max-w-[108px] object-contain sm:max-h-7 sm:max-w-[128px]"}
+        className={compact ? "h-5 w-auto object-contain sm:h-6" : "max-h-6 w-auto max-w-[108px] object-contain sm:max-h-7 sm:max-w-[128px]"}
       />
     </span>
   );

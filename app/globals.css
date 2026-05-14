@@ -1,6 +1,25 @@
 @import "tailwindcss";
 
 :root {
+  --color-background: #0d1210;
+  --color-foreground: #e8ebe6;
+  --color-primary: #d29635;
+  --color-primary-dark: #a87124;
+  --color-primary-light: #f3d29e;
+  --color-accent: #34e0a1;
+  --color-accent-light: rgba(52, 224, 161, 0.14);
+  --color-accent-cream: #1a1f16;
+  --color-muted: #151c18;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-cta: #d29635;
+  --color-cta-hover: #b87b22;
+  --color-nav-bg: rgba(13, 18, 16, 0.95);
+  --color-nav-text: rgba(232, 235, 230, 0.72);
+  --font-sans: var(--font-lato), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+html.light {
   --color-background: #FFFFFF;
   --color-foreground: #1E211A;
   --color-primary: #244734;
@@ -13,8 +32,8 @@
   --color-border: #E4DED1;
   --color-cta: #C78F35;
   --color-cta-hover: #A87124;
-  --font-sans: var(--font-lato), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --color-nav-bg: rgba(255, 255, 255, 0.95);
+  --color-nav-text: rgba(30, 33, 26, 0.72);
 }
 
 @layer utilities {
@@ -79,9 +98,9 @@ h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
   overflow: hidden;
   background:
-    radial-gradient(circle at 12% 18%, rgba(248, 243, 234, 0.9), transparent 30%),
-    radial-gradient(circle at 82% 0%, rgba(243, 228, 199, 0.45), transparent 28%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.98), rgba(250, 248, 243, 0.96), rgba(255, 255, 255, 0.98));
+    radial-gradient(circle at 12% 18%, color-mix(in srgb, var(--color-accent-cream) 90%, transparent), transparent 30%),
+    radial-gradient(circle at 82% 0%, color-mix(in srgb, var(--color-accent-light) 45%, transparent), transparent 28%),
+    linear-gradient(120deg, color-mix(in srgb, var(--color-muted) 98%, transparent), color-mix(in srgb, var(--color-accent-cream) 96%, transparent), color-mix(in srgb, var(--color-muted) 98%, transparent));
 }
 
 .soft-animated-surface::before {
@@ -90,8 +109,8 @@ h1, h2, h3, h4, h5, h6 {
   inset: -70%;
   z-index: -1;
   background:
-    radial-gradient(circle, rgba(36, 71, 52, 0.045) 0 8%, transparent 9% 100%),
-    radial-gradient(circle, rgba(199, 143, 53, 0.07) 0 7%, transparent 8% 100%);
+    radial-gradient(circle, color-mix(in srgb, var(--color-primary) 4.5%, transparent) 0 8%, transparent 9% 100%),
+    radial-gradient(circle, color-mix(in srgb, var(--color-accent) 7%, transparent) 0 7%, transparent 8% 100%);
   background-position: 0 0, 42px 34px;
   background-size: 96px 96px, 128px 128px;
   opacity: 0.7;
@@ -103,7 +122,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(100deg, transparent 0%, rgba(255, 255, 255, 0.75) 45%, transparent 70%);
+  background: linear-gradient(100deg, transparent 0%, color-mix(in srgb, var(--color-foreground) 8%, transparent) 45%, transparent 70%);
   transform: translateX(-100%);
   animation: soft-sheen 12s ease-in-out infinite;
 }
@@ -133,4 +152,169 @@ h1, h2, h3, h4, h5, h6 {
   .soft-animated-surface::after {
     animation: none;
   }
+}
+
+/* ---- Uiverse Theme Toggle ---- */
+.toggleWrapper {
+  overflow: hidden;
+  padding: 0 8px;
+  color: white;
+}
+
+.toggleWrapper .input {
+  position: absolute;
+  left: -99em;
+}
+
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 50px;
+  cursor: pointer;
+  transform: scale(0.74);
+  transform-origin: right center;
+  border-radius: 84px;
+  background: #83d8ff;
+}
+
+.toggle:before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 80px;
+  height: 40px;
+  border-radius: 40px;
+  background: #ffcf96;
+  transition: 0.3s ease;
+}
+
+.toggle__handler {
+  position: absolute;
+  z-index: 1;
+  top: 3px;
+  left: 3px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffcf96;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.crater {
+  position: absolute;
+  border-radius: 100%;
+  background: #e8cda5;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.crater--1 {
+  top: 18px;
+  left: 10px;
+  width: 4px;
+  height: 4px;
+}
+
+.crater--2 {
+  top: 28px;
+  left: 22px;
+  width: 6px;
+  height: 6px;
+}
+
+.crater--3 {
+  top: 10px;
+  left: 25px;
+  width: 8px;
+  height: 8px;
+}
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.star--1 {
+  top: 10px;
+  left: 35px;
+  width: 6px;
+  height: 6px;
+}
+
+.star--2 {
+  top: 18px;
+  left: 28px;
+  width: 4px;
+  height: 4px;
+}
+
+.star--3 {
+  top: 28px;
+  left: 40px;
+  width: 3px;
+  height: 3px;
+}
+
+.star--4,
+.star--5,
+.star--6 {
+  opacity: 0;
+  transform: translate3d(3px, 0, 0);
+}
+
+.star--4 {
+  top: 16px;
+  left: 62px;
+  width: 3px;
+  height: 3px;
+}
+
+.star--5 {
+  top: 32px;
+  left: 72px;
+  width: 4px;
+  height: 4px;
+}
+
+.star--6 {
+  top: 36px;
+  left: 52px;
+  width: 3px;
+  height: 3px;
+}
+
+.input:checked + .toggle {
+  background: #749dd6;
+}
+
+.input:checked + .toggle:before {
+  background: #1f2533;
+}
+
+.input:checked + .toggle .toggle__handler {
+  transform: translate3d(40px, 0, 0) rotate(0);
+  background: #ffe5b5;
+}
+
+.input:checked + .toggle .crater {
+  opacity: 1;
+}
+
+.input:checked + .toggle .star--1,
+.input:checked + .toggle .star--2,
+.input:checked + .toggle .star--3 {
+  opacity: 0;
+  transform: translate3d(-4px, 0, 0);
+}
+
+.input:checked + .toggle .star--4,
+.input:checked + .toggle .star--5,
+.input:checked + .toggle .star--6 {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }

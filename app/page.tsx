@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import PlatformIcons from "@/components/PlatformIcons";
 import TourCard, { Tour } from "@/components/TourCard";
 
@@ -40,117 +41,165 @@ const featuredTours: Tour[] = [
 
 export default function Home() {
   return (
-    <div>
-      <section className="relative flex min-h-[calc(100svh-64px)] items-center overflow-hidden sm:min-h-[calc(100vh-80px)]">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/delighttoursandtravel.png"
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src="https://cdn.pixabay.com/video/2023/11/13/188290-886761768_large.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-primary-dark/70" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background to-transparent" />
+    <div className="bg-background text-foreground">
+      <section className="relative isolate min-h-[calc(100svh-112px)] overflow-hidden sm:min-h-[calc(100vh-128px)]">
+        <Image
+          src="/tours/victoria-falls-guided-tour.jpg"
+          alt="A traveler walking through the rainforest near Victoria Falls"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "linear-gradient(90deg, color-mix(in srgb, #0d1210 92%, transparent) 0%, color-mix(in srgb, #0d1210 68%, transparent) 48%, color-mix(in srgb, #0d1210 24%, transparent) 100%)",
+          }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#0d1210] to-transparent" />
 
-        <div className="relative z-10 mx-auto grid w-full max-w-7xl gap-8 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[1.05fr_0.75fr] lg:items-end">
-          <div className="max-w-3xl text-white">
-            <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:mb-5 sm:text-sm sm:tracking-[0.28em]">Victoria Falls experiences</p>
-            <h1 className="max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-6xl">
-              Travel simply, beautifully, and with people who know the place.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-white/85 sm:mt-6 sm:text-lg sm:leading-8">
-              Minimal fuss, thoughtful planning, and guided tours across Victoria Falls, the Zambezi, Chobe, and beyond.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row">
+        <div className="relative z-10 mx-auto flex min-h-[calc(100svh-112px)] w-full max-w-7xl flex-col justify-end px-4 pb-8 pt-16 sm:min-h-[calc(100vh-128px)] sm:px-6 sm:pb-10 lg:pt-24">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-end">
+            <div className="max-w-4xl">
+              <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-border bg-background/10 px-3 py-2 text-xs font-bold uppercase tracking-[0.18em] text-accent-light backdrop-blur">
+                <span className="h-2 w-2 rounded-full bg-accent" />
+                Victoria Falls Experiences
+              </div>
+              <h1 className="max-w-4xl text-4xl font-bold leading-[1.03] text-foreground sm:text-6xl lg:text-7xl">
+                Curated tours around the Falls, planned with local precision.
+              </h1>
+              <p className="mt-5 max-w-2xl text-base leading-7 text-foreground/75 sm:text-lg sm:leading-8">
+                Guided rainforest walks, Zambezi cruises, safari day trips, and smooth transfers built around clear timing, warm service, and beautiful places.
+              </p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/booking"
+                  className="inline-flex items-center justify-center rounded-md bg-cta px-7 py-3 text-sm font-bold text-white shadow-lg shadow-foreground/15 transition-colors hover:bg-cta-hover"
+                >
+                  Start Booking
+                </Link>
+                <Link
+                  href="#featured-tours"
+                  className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-7 py-3 text-sm font-bold text-foreground backdrop-blur transition-colors hover:bg-background/20"
+                >
+                  Explore Tours
+                </Link>
+              </div>
+            </div>
+
+            <div className="rounded-lg border border-border bg-background/10 p-4 shadow-2xl shadow-foreground/10 backdrop-blur-md sm:p-5">
+              <div className="flex items-start justify-between gap-4 border-b border-border pb-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-foreground/50">Today&apos;s pick</p>
+                  <h2 className="mt-2 text-xl font-bold text-foreground">Zambezi Sunset Cruise</h2>
+                </div>
+                <p className="rounded-md bg-accent px-2.5 py-1 text-xs font-bold text-primary-dark">4.9</p>
+              </div>
+              <div className="grid grid-cols-3 gap-3 py-4 text-sm">
+                {[
+                  ["2.5h", "Duration"],
+                  ["$85", "From"],
+                  ["218", "Reviews"],
+                ].map(([value, label]) => (
+                  <div key={label}>
+                    <p className="text-xl font-bold text-foreground">{value}</p>
+                    <p className="mt-1 text-xs text-foreground/50">{label}</p>
+                  </div>
+                ))}
+              </div>
               <Link
-                href="/tours"
-                className="inline-flex items-center justify-center rounded-md bg-cta px-7 py-3 text-sm font-bold text-white shadow-lg transition-colors hover:bg-cta-hover"
+                href="/booking?tourId=2"
+                className="inline-flex w-full items-center justify-center rounded-md bg-background px-4 py-3 text-sm font-bold text-primary-dark transition-colors hover:bg-accent-light"
               >
-                Explore Tours
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center rounded-md border border-white/70 bg-white/10 px-7 py-3 text-sm font-bold text-white backdrop-blur transition-colors hover:bg-white hover:text-primary-dark"
-              >
-                Plan a Trip
+                Reserve this tour
               </Link>
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-3 border-t border-white/20 pt-5 text-white/85 sm:border-l sm:border-t-0 sm:pl-6 sm:pt-0 lg:grid-cols-1">
+          <div className="mt-10 grid gap-3 border-t border-border pt-5 text-foreground/75 sm:grid-cols-3 lg:max-w-3xl">
             {[
               ["4.8/5", "Guest rating"],
               ["1,200+", "Happy travelers"],
               ["24h", "Fast confirmations"],
             ].map(([value, label]) => (
-              <div key={label}>
-                <p className="text-xl font-bold text-white sm:text-3xl">{value}</p>
-                <p className="mt-1 text-xs leading-4 sm:text-sm">{label}</p>
+              <div key={label} className="rounded-md bg-background/5 px-4 py-3 backdrop-blur">
+                <p className="text-2xl font-bold text-foreground">{value}</p>
+                <p className="mt-1 text-sm text-foreground/60">{label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="border-b border-border bg-background">
-        <div className="mx-auto grid max-w-7xl gap-7 px-4 py-10 sm:px-6 sm:py-12 md:grid-cols-3">
+      <section className="border-y border-border bg-muted">
+        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[0.7fr_1fr] lg:items-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Connected platforms</p>
+            <p className="mt-2 max-w-xl text-sm leading-6 text-foreground/60">
+              Familiar booking and review partners, with a local team handling the actual trip details.
+            </p>
+          </div>
+          <PlatformIcons />
+        </div>
+      </section>
+
+      <section className="bg-accent-cream text-foreground">
+        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-10 sm:px-6 md:grid-cols-3">
           {[
-            ["Local planning", "Routes, transfers, timings, and special requests handled with practical local knowledge."],
-            ["Trusted partners", "Book confidently across Bokun, Viator, GetYourGuide, and Tripadvisor-ready workflows."],
-            ["Clean experience", "Clear prices, fast communication, and no clutter between you and the trip."],
+            ["Plan", "Choose a tour, date, group size, and any special requests in a single clean flow."],
+            ["Confirm", "Get clear timing, pickup details, and booking support before the activity."],
+            ["Experience", "Meet local guides and enjoy Victoria Falls without chasing logistics."],
           ].map(([title, description]) => (
-            <div key={title}>
-              <h2 className="text-base font-bold text-primary-dark">{title}</h2>
+            <div key={title} className="rounded-md border border-border bg-background p-5 shadow-sm">
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">{title}</p>
               <p className="mt-3 text-sm leading-6 text-foreground/65">{description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="border-b border-border bg-muted/60">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between">
-          <p className="text-center text-xs font-bold uppercase tracking-[0.22em] text-accent sm:text-left sm:text-sm">Connected platforms</p>
-          <PlatformIcons />
-        </div>
-      </section>
-
-      <section id="featured-tours" className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 md:py-24">
-        <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Featured tours</p>
-            <h2 className="max-w-2xl text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">Small, polished experiences around the Falls.</h2>
+      <section id="featured-tours" className="bg-background px-4 py-14 text-foreground sm:px-6 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Featured tours</p>
+              <h2 className="max-w-3xl text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
+                Signature experiences around Victoria Falls.
+              </h2>
+            </div>
+            <Link href="/tours" className="inline-flex text-sm font-bold text-primary transition-colors hover:text-cta">
+              View all tours
+            </Link>
           </div>
-          <Link href="/tours" className="text-sm font-bold text-primary transition-colors hover:text-cta">
-            View all tours
-          </Link>
-        </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featuredTours.map((tour) => (
-            <TourCard key={tour.id} tour={tour} />
-          ))}
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {featuredTours.map((tour) => (
+              <TourCard key={tour.id} tour={tour} />
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="bg-muted py-14 sm:py-16 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.85fr_1fr] lg:items-center">
+      <section className="bg-background px-4 py-14 sm:px-6 sm:py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.78fr_1fr] lg:items-center">
           <div>
-            <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Why Delight</p>
-            <h2 className="text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-              Professional travel support without making the page feel busy.
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent-light">Why Delight</p>
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">
+              A calmer way to book the big-ticket moments.
             </h2>
+            <p className="mt-4 max-w-xl text-sm leading-6 text-foreground/60">
+              The interface stays simple because the service behind it does the heavy lifting: timing, transfer coordination, local recommendations, and responsive support.
+            </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {[
               "Handpicked activities around Victoria Falls",
               "Simple booking and clear communication",
-              "Guest-first service before and after the tour",
-              "Flexible support for couples, families, and groups",
+              "Guest-first support before and after the tour",
+              "Flexible help for couples, families, and groups",
             ].map((item) => (
-              <div key={item} className="rounded-md border border-border bg-white p-5 text-sm font-semibold text-foreground/75 shadow-sm">
+              <div key={item} className="rounded-md border border-border bg-background/5 p-5 text-sm font-semibold leading-6 text-foreground/75">
                 {item}
               </div>
             ))}
@@ -158,17 +207,19 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 text-center sm:px-6 sm:py-16 md:py-24">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Ready when you are</p>
-        <h2 className="mx-auto max-w-2xl text-2xl font-bold text-foreground sm:text-3xl md:text-4xl">
-          Let us shape a clean, memorable itinerary for your next trip.
-        </h2>
-        <Link
-          href="/booking"
-          className="mt-8 inline-flex items-center justify-center rounded-md bg-cta px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover"
-        >
-          Start Booking
-        </Link>
+      <section className="relative overflow-hidden bg-accent-cream px-4 py-14 text-center text-foreground sm:px-6 sm:py-16 md:py-24">
+        <div className="mx-auto max-w-3xl">
+          <p className="mb-3 text-sm font-bold uppercase tracking-[0.22em] text-accent">Ready when you are</p>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl md:text-5xl">
+            Shape a clean, memorable itinerary for your next trip.
+          </h2>
+          <Link
+            href="/booking"
+            className="mt-8 inline-flex items-center justify-center rounded-md bg-primary px-7 py-3 text-sm font-bold text-white transition-colors hover:bg-primary-dark"
+          >
+            Start Booking
+          </Link>
+        </div>
       </section>
     </div>
   );

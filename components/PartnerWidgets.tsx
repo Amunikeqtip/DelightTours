@@ -12,12 +12,14 @@ type WidgetCardProps = {
 
 function WidgetFallback({ title, description, logoSrc, logoAlt }: WidgetCardProps) {
   return (
-    <div className="flex min-h-40 flex-col justify-between rounded-md border border-border bg-white p-5 shadow-sm">
+    <div className="flex min-h-40 flex-col justify-between rounded-lg border border-border bg-background/10 p-5 text-foreground shadow-sm backdrop-blur">
       <div className="flex items-center gap-3">
-        <Image src={logoSrc} alt={logoAlt} width={112} height={32} className="h-8 w-auto object-contain" />
+        <span className="rounded-md bg-background px-2 py-1">
+          <Image src={logoSrc} alt={logoAlt} width={112} height={32} className="h-8 w-auto object-contain" />
+        </span>
         <p className="text-sm font-bold text-foreground">{title}</p>
       </div>
-      <p className="mt-5 text-sm leading-6 text-foreground/65">{description}</p>
+      <p className="mt-5 text-sm leading-6 text-foreground/60">{description}</p>
     </div>
   );
 }
@@ -42,7 +44,7 @@ export function BokunWidget() {
   )}`;
 
   return (
-    <div className="rounded-md border border-border bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-border bg-background p-4 shadow-sm">
       <div className="bokunWidget" data-src={widgetDataSrc} />
       <Script id="bokun-widget-loader" src={loaderSrc} strategy="lazyOnload" />
     </div>
@@ -64,7 +66,7 @@ export function TripadvisorWidget() {
   }
 
   return (
-    <div className="rounded-md border border-border bg-white p-4 shadow-sm">
+    <div className="rounded-lg border border-border bg-background p-4 shadow-sm">
       <div id="TA_selfserveprop_delight_tours" />
       <Script id="tripadvisor-widget" src={widgetSrc} strategy="lazyOnload" />
     </div>

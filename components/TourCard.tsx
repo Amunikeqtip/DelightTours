@@ -15,7 +15,7 @@ export interface Tour {
 
 export default function TourCard({ tour }: { tour: Tour }) {
   return (
-    <div className="group overflow-hidden rounded-xl border border-border bg-white transition-shadow hover:shadow-lg">
+    <div className="group overflow-hidden rounded-xl border border-border bg-background transition-shadow hover:shadow-lg">
       <div className="relative aspect-[4/3] overflow-hidden bg-accent-cream sm:aspect-[16/11]">
         {tour.image ? (
           <Image
@@ -32,13 +32,18 @@ export default function TourCard({ tour }: { tour: Tour }) {
         )}
 
         {tour.category && (
-          <span className="absolute left-3 top-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary shadow-sm">
+          <span className="absolute left-3 top-3 rounded-full bg-background/90 px-3 py-1 text-xs font-semibold text-primary shadow-sm">
             {tour.category}
           </span>
         )}
 
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-3 pb-3 pt-10">
-          <div className="inline-flex max-w-full items-center gap-2 rounded-md bg-white/95 px-3 py-2 text-xs font-bold text-primary-dark shadow-sm backdrop-blur">
+        <div
+          className="absolute inset-x-0 bottom-0 px-3 pb-3 pt-10"
+          style={{
+            background: "linear-gradient(to top, color-mix(in srgb, var(--color-background) 80%, transparent), color-mix(in srgb, var(--color-background) 35%, transparent) 50%, transparent)",
+          }}
+        >
+          <div className="inline-flex max-w-full items-center gap-2 rounded-md bg-background/95 px-3 py-2 text-xs font-bold text-primary-dark shadow-sm backdrop-blur">
             <Image
               src="/platforms/tripadvisor.svg"
               alt="Tripadvisor"
@@ -46,7 +51,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
               height={18}
               className="h-[18px] w-[18px] object-contain"
             />
-            <span className="text-[#00AA6C]" aria-label="5 out of 5 stars">
+            <span className="text-accent" aria-label="5 out of 5 stars">
               ★★★★★
             </span>
             <span className="whitespace-nowrap">
