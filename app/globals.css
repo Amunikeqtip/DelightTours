@@ -323,3 +323,12 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1;
   transform: translate3d(0, 0, 0);
 }
+
+/* Theme-aware logo: invert to white in dark mode, natural in light mode */
+.logo-img {
+  filter: brightness(0) invert(1);
+}
+
+html.light .logo-img {
+  filter: none;
+}

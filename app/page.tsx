@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import PlatformIcons from "@/components/PlatformIcons";
 import TourCard, { Tour } from "@/components/TourCard";
 
 const featuredTours: Tour[] = [
@@ -129,18 +128,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="border-y border-border bg-muted">
-        <div className="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 lg:grid-cols-[0.7fr_1fr] lg:items-center">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Connected platforms</p>
-            <p className="mt-2 max-w-xl text-sm leading-6 text-foreground/60">
-              Familiar booking and review partners, with a local team handling the actual trip details.
-            </p>
-          </div>
-          <PlatformIcons />
         </div>
       </section>
 

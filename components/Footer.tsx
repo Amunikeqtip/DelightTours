@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import PlatformIcons from "@/components/PlatformIcons";
 
 const footerLinks = {
   "Quick Links": [
@@ -45,13 +44,13 @@ export default function Footer() {
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 sm:px-6 sm:py-12 lg:grid-cols-4">
         <div>
-          <Link href="/" className="mb-4 inline-flex rounded-md bg-white px-2 py-1">
+          <Link href="/" className="mb-4 inline-flex">
             <Image
               src="/delighttoursandtravel.png"
               alt="Delight Tours & Travel"
               width={160}
               height={56}
-              className="h-11 w-auto object-contain object-left sm:h-12"
+              className="logo-img h-11 w-auto object-contain object-left sm:h-12"
             />
           </Link>
           <p className="text-sm leading-relaxed text-foreground/60">
@@ -99,10 +98,6 @@ export default function Footer() {
           <p className="text-xs leading-5 text-foreground/45">
             &copy; {new Date().getFullYear()} Delight Tours & Travel. All rights reserved.
           </p>
-          <div className="flex w-full flex-col items-center gap-2 text-xs text-foreground/45 sm:w-auto sm:flex-row sm:gap-3">
-            <span className="shrink-0">Powered by</span>
-            <PlatformIcons compact />
-          </div>
         </div>
       </div>
     </footer>

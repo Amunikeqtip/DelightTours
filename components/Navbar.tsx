@@ -26,16 +26,14 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between overflow-hidden px-4 sm:px-6">
         <Link href="/" className="flex min-w-0 flex-shrink-0 items-center">
-          <span className="rounded-md bg-white px-2 py-1">
-            <Image
-              src="/delighttoursandtravel.png"
-              alt="Delight Tours & Travel"
-              width={140}
-              height={35}
-              className="h-8 w-auto sm:h-9"
-              priority
-            />
-          </span>
+          <Image
+            src="/delighttoursandtravel.png"
+            alt="Delight Tours & Travel"
+            width={140}
+            height={35}
+            className="logo-img h-8 w-auto sm:h-9"
+            priority
+          />
         </Link>
 
         <div className="flex items-center gap-4">
