@@ -57,7 +57,7 @@ for (const test of TESTS) {
     const body = await res.json();
 
     if (res.ok && body.ok) {
-      console.log(`✓ PASS  →  to: ${body.to}  flow: ${body.flow}`);
+      console.log(`✓ PASS  →  admin: ${body.adminTo}  client: ${body.clientTo ?? "n/a (review flow)"}  flow: ${body.flow}`);
       passed++;
     } else {
       console.log(`✗ FAIL  →  HTTP ${res.status}  ${JSON.stringify(body)}`);

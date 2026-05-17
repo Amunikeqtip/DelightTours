@@ -241,6 +241,29 @@ export function buildBookingFollowUpEmailHtml(details: ClientMessageDetails = {}
   );
 }
 
+export function buildClientConfirmationEmailHtml(details: ClientMessageDetails = {}, flowLabel = "enquiry") {
+  const clientName = escapeHtml(valueOrPlaceholder(details.clientName, "there"));
+  const providerName = escapeHtml(serviceProviderContact.providerName);
+  const tourOrServiceName = escapeHtml(valueOrPlaceholder(details.tourOrServiceName, "your selected tour"));
+  const phone = escapeHtml(serviceProviderContact.phone);
+  const email = escapeHtml(serviceProviderContact.email);
+  const website = escapeHtml(serviceProviderContact.website);
+
+  return renderBrandedEmailHtml(
+    `We received your ${flowLabel}`,
+    `<p>Hi ${clientName},</p>
+    <p>Thank you for contacting <strong>${providerName}</strong>. We have received your ${flowLabel} for <strong>${tourOrServiceName}</strong> and will be in touch shortly.</p>
+    <p>Our team typically responds within a few hours. In the meantime, you are welcome to reach us directly:</p>
+    <ul>
+      <li>Phone/WhatsApp: ${phone}</li>
+      <li>Email: ${email}</li>
+      <li>Website: <a href="${website}" style="color:#174437;">${website}</a></li>
+    </ul>
+    <p>We look forward to showing you Victoria Falls.</p>
+    <p>Warm regards,<br />The ${providerName} Team</p>`,
+  );
+}
+
 export function buildCancellationTemplate(details: ClientMessageDetails = {}) {
   const providerName = valueOrPlaceholder(details.serviceProviderName, "[Service Provider Name]");
   const clientName = valueOrPlaceholder(details.clientName, "[Client Name]");

@@ -6,6 +6,7 @@ import {
   buildBookingFollowUpTemplate,
   buildCancellationEmailHtml,
   buildCancellationTemplate,
+  buildClientConfirmationEmailHtml,
   buildGeneralClientInquiryEmailHtml,
   buildGeneralClientInquiryTemplate,
   buildReviewRequestEmailHtml,
@@ -138,7 +139,7 @@ export async function POST(request: Request) {
       date: cleanText(payload.date),
     };
 
-    const to = getRecipient(settings.emailFlows, flow);
+    const adminTo = getRecipient(settings.emailFlows, flow);
     const { subject, html, text } = getSubjectAndTemplates(flow, clientName, details);
 
     const transporter = nodemailer.createTransport({
@@ -152,18 +153,38 @@ export async function POST(request: Request) {
       },
     });
 
+    const from = `"${serviceProviderContact.providerName}" <${emailSettings.EmailUsername}>`;
+
+    // 1. Admin notification
     await transporter.sendMail({
-      from: `"${serviceProviderContact.providerName}" <${emailSettings.EmailUsername}>`,
-      to,
+      from,
+      to: adminTo,
       replyTo: `"${clientName}" <${clientEmail}>`,
       subject,
       text,
       html,
     });
 
-    return Response.json({ ok: true, to, flow });
+    // 2. Client confirmation (reviewRequest is already a client-facing email so skip the confirmation)
+    if (flow !== "reviewRequest") {
+      const flowLabel = flow === "booking" ? "booking request" : flow === "cancellation" ? "cancellation request" : "enquiry";
+      const clientSubject = flow === "cancellation"
+        ? `Cancellation received — ${serviceProviderContact.providerName}`
+        : `We received your ${flowLabel} — ${serviceProviderContact.providerName}`;
+
+      await transporter.sendMail({
+        from,
+        to: clientEmail,
+        subject: clientSubject,
+        text: `Hi ${clientName},\n\nThank you for contacting ${serviceProviderContact.providerName}. We have received your ${flowLabel} and will be in touch shortly.\n\nPhone/WhatsApp: ${serviceProviderContact.phone}\nEmail: ${serviceProviderContact.email}`,
+        html: buildClientConfirmationEmailHtml(details, flowLabel),
+      });
+    }
+
+    return Response.json({ ok: true, adminTo, clientTo: flow !== "reviewRequest" ? clientEmail : null, flow });
   } catch (error) {
-    console.error("Client inquiry email failed", error);
-    return Response.json({ error: "Unable to send inquiry right now." }, { status: 500 });
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("Client inquiry email failed:", message, error);
+    return Response.json({ error: "Unable to send inquiry right now.", detail: message }, { status: 500 });
   }
 }
