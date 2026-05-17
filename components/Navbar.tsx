@@ -7,13 +7,13 @@ import { usePathname } from "next/navigation";
 import { useTheme } from "@/components/ThemeProvider";
 
 const leftLinks = [
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/tours", label: "Tours & Activities" },
 ];
 
 const rightLinks = [
-  { href: "/", label: "Home" },
-  { href: "/tours", label: "Tours & Activities" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -37,10 +37,10 @@ export default function Navbar() {
         boxShadow: scrolled ? undefined : "none",
       }}
     >
-      <div className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6">
+      <div className="mx-auto grid h-14 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6">
 
-        {/* Left links */}
-        <ul className="hidden items-center gap-6 md:flex lg:gap-8">
+        {/* Left — Home · Tours & Activities */}
+        <ul className="hidden items-center gap-4 md:flex lg:gap-6">
           {leftLinks.map((link) => (
             <li key={link.href}>
               <Link
@@ -54,20 +54,20 @@ export default function Navbar() {
         </ul>
 
         {/* Center — logo */}
-        <Link href="/" className="flex justify-center">
+        <Link href="/" className="flex justify-center px-4">
           <Image
             src="/delighttoursandtravel.png"
             alt="Delight Tours & Travel"
-            width={140}
-            height={35}
-            className="logo-img h-8 w-auto sm:h-9"
+            width={120}
+            height={30}
+            className="logo-img h-7 w-auto sm:h-8"
             priority
           />
         </Link>
 
-        {/* Right links + Book Now + theme toggle */}
-        <div className="flex items-center justify-end gap-4">
-          <ul className="hidden items-center gap-6 md:flex lg:gap-8">
+        {/* Right — About · Contact · Book Now · toggle */}
+        <div className="flex items-center justify-end gap-3">
+          <ul className="hidden items-center gap-4 md:flex lg:gap-6">
             {rightLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -81,7 +81,7 @@ export default function Navbar() {
           </ul>
           <Link
             href="/booking"
-            className="hidden whitespace-nowrap rounded-full bg-cta px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-cta-hover md:inline-flex lg:px-5"
+            className="hidden whitespace-nowrap rounded-full bg-cta px-3.5 py-1.5 text-sm font-bold text-white transition-colors hover:bg-cta-hover md:inline-flex"
           >
             Book Now
           </Link>
