@@ -241,6 +241,91 @@ export function buildBookingFollowUpEmailHtml(details: ClientMessageDetails = {}
   );
 }
 
+export function buildCancellationTemplate(details: ClientMessageDetails = {}) {
+  const providerName = valueOrPlaceholder(details.serviceProviderName, "[Service Provider Name]");
+  const clientName = valueOrPlaceholder(details.clientName, "[Client Name]");
+  const tourOrServiceName = valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]");
+  const date = valueOrPlaceholder(details.date, "[Date]");
+
+  return `${buildCompanyIntro()}
+
+Dear ${providerName},
+
+This is a cancellation notice for the booking listed below.
+
+${buildClientDetailsText(details)}
+
+Tour/Service: ${tourOrServiceName}
+Original date: ${date}
+
+Please confirm cancellation and advise on any applicable refund or rebooking options.
+
+Regards,
+${clientName}
+
+${buildCompanyFooter()}`;
+}
+
+export function buildCancellationEmailHtml(details: ClientMessageDetails = {}) {
+  const providerName = escapeHtml(valueOrPlaceholder(details.serviceProviderName, "[Service Provider Name]"));
+  const clientName = escapeHtml(valueOrPlaceholder(details.clientName, "[Client Name]"));
+  const tourOrServiceName = escapeHtml(valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]"));
+  const date = escapeHtml(valueOrPlaceholder(details.date, "[Date]"));
+
+  return renderBrandedEmailHtml(
+    "Booking cancellation notice",
+    `${buildClientDetailsHtml(details)}
+    <p>Dear ${providerName},</p>
+    <p>This is a cancellation notice for the booking below.</p>
+    <table role="presentation" style="margin:0 0 22px;padding:16px;border:1px solid #e2d7c5;border-radius:6px;background:#fbf8f2;width:100%;">
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Tour/Service</td><td>${tourOrServiceName}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Original date</td><td>${date}</td></tr>
+    </table>
+    <p>Please confirm the cancellation and advise on any applicable refund or rebooking options.</p>
+    <p>Regards,<br />${clientName}</p>`,
+  );
+}
+
+export function buildReviewRequestTemplate(details: ClientMessageDetails = {}) {
+  const clientName = valueOrPlaceholder(details.clientName, "[Client Name]");
+  const tourOrServiceName = valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]");
+
+  return `${buildCompanyIntro()}
+
+Dear ${clientName},
+
+Thank you for joining us on the ${tourOrServiceName}. We hope it was a highlight of your trip to Victoria Falls.
+
+If you have a moment, we'd love to hear how your experience went. Leaving a review on TripAdvisor helps other travelers find us and helps our local team keep improving.
+
+Leave a review: https://www.tripadvisor.com/
+
+Thank you for travelling with ${serviceProviderContact.providerName}.
+
+Warm regards,
+The Delight Tours Team
+
+${buildCompanyFooter()}`;
+}
+
+export function buildReviewRequestEmailHtml(details: ClientMessageDetails = {}) {
+  const clientName = escapeHtml(valueOrPlaceholder(details.clientName, "[Client Name]"));
+  const tourOrServiceName = escapeHtml(valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]"));
+  const providerName = escapeHtml(serviceProviderContact.providerName);
+
+  return renderBrandedEmailHtml(
+    "How was your tour?",
+    `<p>Dear ${clientName},</p>
+    <p>Thank you for joining us on the <strong>${tourOrServiceName}</strong>. We hope it was a highlight of your trip to Victoria Falls.</p>
+    <p>If you have a moment, we'd love to hear how your experience went. Leaving a review on TripAdvisor helps other travelers find us and helps our local team keep improving.</p>
+    <p style="margin:24px 0;">
+      <a href="https://www.tripadvisor.com/" style="display:inline-block;background:#34e0a1;color:#0d1210;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;">Leave a TripAdvisor review</a>
+    </p>
+    <p>Thank you for travelling with ${providerName}.</p>
+    <p>Warm regards,<br />The Delight Tours Team</p>`,
+  );
+}
+
 export function buildMailToLink(email: string, subject: string, body: string) {
   return `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
