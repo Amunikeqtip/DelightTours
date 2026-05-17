@@ -4,7 +4,6 @@ import Image from "next/image";
 const footerLinks = {
   "Quick Links": [
     { href: "/tours", label: "Tours & Activities" },
-    { href: "/reviews", label: "Reviews" },
     { href: "/booking", label: "Book Now" },
     { href: "/about", label: "About Us" },
   ],

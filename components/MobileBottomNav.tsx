@@ -6,7 +6,7 @@ const navLinks = [
   { href: "/", label: "Home", icon: "pi pi-home" },
   { href: "/tours", label: "Tours", icon: "pi pi-compass" },
   { href: "/booking", label: "Book", icon: "pi pi-send" },
-  { href: "/reviews", label: "Reviews", icon: "pi pi-star" },
+  { href: "/about", label: "About", icon: "pi pi-info-circle" },
   { href: "/contact", label: "Contact", icon: "pi pi-phone" },
 ];
 
