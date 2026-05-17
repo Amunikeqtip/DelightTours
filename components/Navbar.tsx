@@ -37,10 +37,10 @@ export default function Navbar() {
         boxShadow: scrolled ? undefined : "none",
       }}
     >
-      <div className="mx-auto grid h-14 max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-4 sm:px-6">
+      <div className="mx-auto grid h-14 max-w-7xl grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6">
 
-        {/* Left — Home · Tours & Activities */}
-        <ul className="hidden items-center gap-4 md:flex lg:gap-6">
+        {/* Left — links pushed right toward the logo */}
+        <ul className="hidden items-center justify-end gap-5 md:flex">
           {leftLinks.map((link) => (
             <li key={link.href}>
               <Link
@@ -54,7 +54,7 @@ export default function Navbar() {
         </ul>
 
         {/* Center — logo */}
-        <Link href="/" className="flex justify-center px-4">
+        <Link href="/" className="flex justify-center px-5">
           <Image
             src="/delighttoursandtravel.png"
             alt="Delight Tours & Travel"
@@ -65,9 +65,9 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Right — About · Contact · Book Now · toggle */}
-        <div className="flex items-center justify-end gap-3">
-          <ul className="hidden items-center gap-4 md:flex lg:gap-6">
+        {/* Right — links pushed left toward the logo, controls at far right */}
+        <div className="flex items-center justify-between">
+          <ul className="hidden items-center gap-5 md:flex">
             {rightLinks.map((link) => (
               <li key={link.href}>
                 <Link
@@ -79,6 +79,7 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
+          <div className="flex items-center gap-3">
           <Link
             href="/booking"
             className="hidden whitespace-nowrap rounded-full bg-cta px-3.5 py-1.5 text-sm font-bold text-white transition-colors hover:bg-cta-hover md:inline-flex"
@@ -108,7 +109,8 @@ export default function Navbar() {
               <span className="star star--6"></span>
             </label>
           </div>
-        </div>
+          </div>{/* end controls */}
+        </div>{/* end right column */}
 
       </div>
     </nav>
