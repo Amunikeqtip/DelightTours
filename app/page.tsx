@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import TourCard, { Tour } from "@/components/TourCard";
+import PlatformIcons from "@/components/PlatformIcons";
 
 const featuredTours: Tour[] = [
   {
@@ -128,6 +129,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-muted">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-4 px-4 py-5 sm:justify-between sm:px-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground/45">Trusted and verified on</p>
+          <PlatformIcons compact include={["Tripadvisor", "Bokun"]} />
         </div>
       </section>
 

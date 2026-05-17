@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ReviewCard, { Review } from "@/components/ReviewCard";
+import { TripadvisorWidget } from "@/components/PartnerWidgets";
 
 const reviews: Review[] = [
   { id: "1", author: "Sarah M.", rating: 5, title: "Absolutely magical experience!", content: "The Victoria Falls tour exceeded all expectations. Our guide was knowledgeable and the whole day felt beautifully handled.", date: "March 2026", avatar: "" },
@@ -166,6 +167,13 @@ export default function AboutPage() {
             {sorted.map((review) => (
               <ReviewCard key={review.id} review={review} />
             ))}
+          </div>
+
+          {/* TripAdvisor verified widget */}
+          <div className="mt-10">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Tripadvisor</p>
+            <h3 className="mb-4 text-lg font-bold text-foreground">Verified on Tripadvisor</h3>
+            <TripadvisorWidget />
           </div>
         </div>
       </section>
