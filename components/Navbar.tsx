@@ -65,8 +65,8 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Right — links pushed left toward the logo, controls at far right */}
-        <div className="flex items-center justify-between">
+        {/* Right — links near logo on desktop, toggle always at far right */}
+        <div className="flex items-center">
           <ul className="hidden items-center gap-5 md:flex">
             {rightLinks.map((link) => (
               <li key={link.href}>
@@ -79,7 +79,7 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-          <div className="flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-3">
           <Link
             href="/booking"
             className="hidden whitespace-nowrap rounded-full bg-cta px-3.5 py-1.5 text-sm font-bold text-white transition-colors hover:bg-cta-hover md:inline-flex"
