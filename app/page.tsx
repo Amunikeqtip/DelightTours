@@ -1,43 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import TourCard, { Tour } from "@/components/TourCard";
 import PlatformIcons from "@/components/PlatformIcons";
-
-const featuredTours: Tour[] = [
-  {
-    id: "1",
-    title: "Victoria Falls Guided Tour",
-    description: "Walk the rainforest trails with a local guide and see the falls from the most dramatic viewpoints.",
-    price: 65,
-    duration: "3 hours",
-    image: "/tours/victoria-falls-guided-tour.jpg",
-    rating: 4.8,
-    reviewCount: 324,
-    category: "Sightseeing",
-  },
-  {
-    id: "2",
-    title: "Zambezi Sunset Cruise",
-    description: "Settle into an easy evening on the river with golden light, wildlife sightings, and refreshments on board.",
-    price: 85,
-    duration: "2.5 hours",
-    image: "/tours/zambezi-sunset-cruise.jpg",
-    rating: 4.9,
-    reviewCount: 218,
-    category: "River",
-  },
-  {
-    id: "3",
-    title: "Chobe Day Safari",
-    description: "Cross into Botswana for a full-day safari experience with game drives, river viewing, and lunch included.",
-    price: 175,
-    duration: "10 hours",
-    image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80",
-    rating: 4.7,
-    reviewCount: 156,
-    category: "Safari",
-  },
-];
+import { BokunWidget } from "@/components/PartnerWidgets";
 
 export default function Home() {
   return (
@@ -168,11 +132,7 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {featuredTours.map((tour) => (
-              <TourCard key={tour.id} tour={tour} />
-            ))}
-          </div>
+          <BokunWidget />
         </div>
       </section>
 
