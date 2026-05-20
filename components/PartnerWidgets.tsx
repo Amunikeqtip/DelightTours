@@ -47,6 +47,7 @@ export function BokunWidget() {
     <div className="rounded-lg border border-border bg-background p-4 shadow-sm">
       <div className="bokunWidget" data-src={widgetDataSrc} />
       <Script id="bokun-widget-loader" src={loaderSrc} strategy="lazyOnload" />
+      <noscript>Please enable javascript in your browser to book</noscript>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import TourCard, { Tour } from "@/components/TourCard";
+import { BokunWidget } from "@/components/PartnerWidgets";
 
 const allTours: Tour[] = [
   { id: "1", title: "Victoria Falls Guided Tour", description: "Walk the rainforest trails with a local guide and see the falls from the most dramatic viewpoints.", price: 65, duration: "3 hours", image: "/tours/victoria-falls-guided-tour.jpg", rating: 4.8, reviewCount: 324, category: "Sightseeing" },
@@ -68,7 +69,15 @@ export default function ToursPage() {
 
       <section className="bg-accent-cream px-4 py-10 text-foreground sm:px-6 md:py-14">
         <div className="mx-auto max-w-7xl">
-      <div className="mb-8 space-y-4 rounded-lg border border-border bg-background p-4 shadow-sm sm:p-5">
+          <div className="mb-10">
+            <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Live product list</p>
+            <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Browse all tours and activities</h2>
+            <p className="mb-6 max-w-2xl text-sm leading-6 text-foreground/60">
+              Real-time availability and pricing from our Bokun channel — select a tour, choose your date, and book instantly.
+            </p>
+            <BokunWidget />
+          </div>
+          <div className="mb-8 space-y-4 rounded-lg border border-border bg-background p-4 shadow-sm sm:p-5">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <div>
             <label className="mb-2 block text-sm font-semibold text-foreground">Category</label>
