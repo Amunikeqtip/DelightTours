@@ -24,20 +24,12 @@ function WidgetFallback({ title, description, logoSrc, logoAlt }: WidgetCardProp
   );
 }
 
-export function BokunWidget() {
-  const bookingChannelUuid = process.env.NEXT_PUBLIC_BOKUN_BOOKING_CHANNEL_UUID;
-  const widgetDataSrc = process.env.NEXT_PUBLIC_BOKUN_WIDGET_DATA_SRC;
+const BOKUN_BOOKING_CHANNEL_UUID = "49a4a3f7-3b36-4788-a266-a9f0be72ea55";
+const BOKUN_WIDGET_DATA_SRC = "https://widgets.bokun.io/online-sales/49a4a3f7-3b36-4788-a266-a9f0be72ea55/product-list/108434";
 
-  if (!bookingChannelUuid || !widgetDataSrc) {
-    return (
-      <WidgetFallback
-        title="Bokun booking"
-        description="Live availability and checkout will appear here when the Bokun booking channel and widget URL are connected."
-        logoSrc="/platforms/bokun.png"
-        logoAlt="Bokun"
-      />
-    );
-  }
+export function BokunWidget() {
+  const bookingChannelUuid = process.env.NEXT_PUBLIC_BOKUN_BOOKING_CHANNEL_UUID || BOKUN_BOOKING_CHANNEL_UUID;
+  const widgetDataSrc = process.env.NEXT_PUBLIC_BOKUN_WIDGET_DATA_SRC || BOKUN_WIDGET_DATA_SRC;
 
   const loaderSrc = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${encodeURIComponent(
     bookingChannelUuid,
