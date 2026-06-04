@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Script from "next/script";
 
@@ -25,30 +24,19 @@ function WidgetFallback({ title, description, logoSrc, logoAlt }: WidgetCardProp
   );
 }
 
-const BOKUN_BOOKING_CHANNEL_UUID = "49a4a3f7-3b36-4788-a266-a9f0be72ea55";
-const BOKUN_WIDGET_DATA_SRC = "https://widgets.bokun.io/online-sales/49a4a3f7-3b36-4788-a266-a9f0be72ea55/product-list/108434";
+const BOKUN_BOOKING_CHANNEL_UUID = "bc5131c1-3cee-4ff1-a7d7-248d1afa0909";
+const BOKUN_WIDGET_DATA_SRC = "https://widgets.bokun.io/online-sales/bc5131c1-3cee-4ff1-a7d7-248d1afa0909/product-list/109041";
 
 export function BokunWidget() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const bookingChannelUuid = process.env.NEXT_PUBLIC_BOKUN_BOOKING_CHANNEL_UUID || BOKUN_BOOKING_CHANNEL_UUID;
   const widgetDataSrc = process.env.NEXT_PUBLIC_BOKUN_WIDGET_DATA_SRC || BOKUN_WIDGET_DATA_SRC;
 
   const loaderSrc = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${encodeURIComponent(bookingChannelUuid)}`;
 
-  useEffect(() => {
-    const existing = document.getElementById("bokun-widget-loader");
-    if (existing) return;
-
-    const script = document.createElement("script");
-    script.id = "bokun-widget-loader";
-    script.src = loaderSrc;
-    script.async = true;
-    document.body.appendChild(script);
-  }, [loaderSrc]);
-
   return (
     <div className="rounded-lg border border-border bg-background p-4 shadow-sm">
-      <div ref={containerRef} className="bokunWidget" data-src={widgetDataSrc} />
+      <Script id="bokun-widget-loader" src={loaderSrc} strategy="afterInteractive" />
+      <div className="bokunWidget" data-src={widgetDataSrc} />
       <noscript>Please enable javascript in your browser to book</noscript>
     </div>
   );
