@@ -23,15 +23,32 @@ const PAYPAL_QR_IMAGE_SRC = "/paypal-safari-experience-qr.png";
 
 type PayPalHostedButtonProps = {
   className?: string;
-  showPaymentLink?: boolean;
-  showQrCode?: boolean;
 };
 
-export function PayPalHostedButton({
-  className,
-  showPaymentLink = true,
-  showQrCode = true,
-}: PayPalHostedButtonProps) {
+function PaymentOption({
+  step,
+  title,
+  description,
+  children,
+}: {
+  step: string;
+  title: string;
+  description: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="flex h-full min-h-[280px] flex-col rounded-lg border border-border bg-background/10 p-4 sm:p-5">
+      <div className="mb-4 border-b border-border pb-4">
+        <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent-light">{step}</p>
+        <h3 className="mt-2 text-base font-bold text-foreground">{title}</h3>
+        <p className="mt-1 text-sm leading-6 text-foreground/55">{description}</p>
+      </div>
+      <div className="flex flex-1 flex-col items-center justify-center">{children}</div>
+    </div>
+  );
+}
+
+export function PayPalHostedButton({ className }: PayPalHostedButtonProps) {
   const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || PAYPAL_CLIENT_ID;
   const hostedButtonId = process.env.NEXT_PUBLIC_PAYPAL_HOSTED_BUTTON_ID || PAYPAL_HOSTED_BUTTON_ID;
   const paymentLink = process.env.NEXT_PUBLIC_PAYPAL_PAYMENT_LINK || PAYPAL_PAYMENT_LINK;
@@ -66,49 +83,34 @@ export function PayPalHostedButton({
     <div className={className ?? "rounded-lg border border-border bg-background p-4 shadow-sm sm:p-6"}>
       <Script id="paypal-hosted-buttons-sdk" src={sdkSrc} strategy="afterInteractive" onLoad={() => setSdkReady(true)} />
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-start">
-        <div className="min-w-0">
-          <div id={containerId} />
+      <p className="mb-5 text-sm font-semibold text-foreground/70">Choose any PayPal option below — all three go to the same secure checkout.</p>
 
-          {showPaymentLink && (
-            <div className="mt-4 border-t border-border pt-4">
-              {renderError ? (
-                <>
-                  <p className="mb-3 text-sm text-foreground/60">
-                    The PayPal button could not load. You can still pay with the secure link below.
-                  </p>
-                  <a
-                    href={paymentLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-[#0070ba] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#005ea6] sm:w-auto"
-                  >
-                    Pay with PayPal
-                  </a>
-                </>
-              ) : (
-                <p className="text-sm text-foreground/55">
-                  Prefer a direct link?{" "}
-                  <a
-                    href={paymentLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-primary underline-offset-2 hover:underline"
-                  >
-                    Open PayPal payment page
-                  </a>
-                </p>
-              )}
-            </div>
-          )}
-        </div>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:items-stretch">
+        <PaymentOption
+          step="Option 1"
+          title="Stacked buttons"
+          description="Pay on this page with PayPal or card."
+        >
+          <div className="w-full min-h-[120px]">
+            <div id={containerId} />
+            {renderError && (
+              <p className="mt-3 text-center text-sm text-foreground/55">
+                Buttons failed to load. Use the QR code or payment link instead.
+              </p>
+            )}
+          </div>
+        </PaymentOption>
 
-        {showQrCode && (
+        <PaymentOption
+          step="Option 2"
+          title="QR code"
+          description="Scan with your phone to open PayPal checkout."
+        >
           <a
             href={paymentLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="mx-auto flex w-full max-w-[220px] flex-col items-center rounded-md border border-border bg-white p-3 text-center transition-opacity hover:opacity-90"
+            className="flex w-full max-w-[200px] flex-col items-center transition-opacity hover:opacity-90"
             aria-label="Scan QR code to pay with PayPal for Safari Experience"
           >
             <Image
@@ -117,11 +119,26 @@ export function PayPalHostedButton({
               width={196}
               height={220}
               className="h-auto w-full object-contain"
-              priority={false}
             />
-            <span className="mt-2 text-xs font-semibold text-foreground/55">Scan to pay on mobile</span>
+            <span className="mt-3 text-xs font-semibold text-foreground/55">Scan to pay on mobile</span>
           </a>
-        )}
+        </PaymentOption>
+
+        <PaymentOption
+          step="Option 3"
+          title="Payment link"
+          description="Open the PayPal payment page in a new tab."
+        >
+          <a
+            href={paymentLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex w-full items-center justify-center rounded-md bg-[#0070ba] px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-[#005ea6]"
+          >
+            Open PayPal payment link
+          </a>
+          <p className="mt-3 break-all text-center text-xs leading-5 text-foreground/45">{paymentLink}</p>
+        </PaymentOption>
       </div>
     </div>
   );

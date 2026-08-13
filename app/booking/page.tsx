@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { BokunWidget } from "@/components/PartnerWidgets";
-import { PAYPAL_PAYMENT_LINK, PayPalHostedButton } from "@/components/PayPalButton";
+import { PayPalHostedButton } from "@/components/PayPalButton";
 import {
   buildBookingFollowUpTemplate,
   buildMailToLink,
@@ -87,7 +87,7 @@ function BookingForm() {
             A confirmation has been sent to <strong>{form.email}</strong>. Reach us directly to confirm, or pay securely with PayPal:
           </p>
           <div className="mb-8 text-left">
-            <PayPalHostedButton showPaymentLink />
+            <PayPalHostedButton />
           </div>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link href={emailHref} className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
@@ -95,9 +95,6 @@ function BookingForm() {
             </Link>
             <Link href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
               WhatsApp Provider
-            </Link>
-            <Link href={PAYPAL_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
-              Open PayPal Link
             </Link>
             <Link href="/" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
               Back to Home
@@ -158,16 +155,7 @@ function BookingForm() {
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Secure Payment</p>
           <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Pay with PayPal.</h2>
           <p className="mb-6 max-w-2xl text-sm leading-6 text-foreground/60">
-            Use the PayPal checkout below, scan the QR code on your phone, or open the{" "}
-            <a
-              href={PAYPAL_PAYMENT_LINK}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-primary underline-offset-2 hover:underline"
-            >
-              payment link
-            </a>{" "}
-            in a new tab.
+            Three equal PayPal options: stacked buttons on this page, scan the QR code, or open the payment link — pick whichever is easiest.
           </p>
           <PayPalHostedButton />
         </section>
