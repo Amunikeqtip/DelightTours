@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { BokunWidget } from "@/components/PartnerWidgets";
+import { PAYPAL_PAYMENT_LINK, PayPalHostedButton } from "@/components/PayPalButton";
 import {
   buildBookingFollowUpTemplate,
   buildMailToLink,
@@ -83,14 +84,20 @@ function BookingForm() {
             Thank you, {form.name}. Your enquiry for <strong>{selectedTour?.title}</strong> has been received.
           </p>
           <p className="mb-8 text-foreground/60">
-            A confirmation has been sent to <strong>{form.email}</strong>. Reach us directly to confirm:
+            A confirmation has been sent to <strong>{form.email}</strong>. Reach us directly to confirm, or pay securely with PayPal:
           </p>
+          <div className="mb-8 text-left">
+            <PayPalHostedButton showPaymentLink />
+          </div>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link href={emailHref} className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
               Email Provider
             </Link>
             <Link href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
               WhatsApp Provider
+            </Link>
+            <Link href={PAYPAL_PAYMENT_LINK} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
+              Open PayPal Link
             </Link>
             <Link href="/" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
               Back to Home
@@ -123,7 +130,7 @@ function BookingForm() {
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:text-sm">Booking</p>
           <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">Book your tour with a cleaner flow.</h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-white/72">Check live availability and book instantly via Bokun, or send us an enquiry and we will confirm the details.</p>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/72">Check live availability and book via Bokun, pay securely with PayPal, or send us an enquiry and we will confirm the details.</p>
         </div>
       </section>
 
@@ -137,6 +144,32 @@ function BookingForm() {
             Real-time availability from our Bokun booking channel — select a date, choose your group size, and confirm directly.
           </p>
           <BokunWidget />
+        </section>
+
+        {/* OR divider */}
+        <div className="my-10 flex items-center gap-4">
+          <div className="h-px flex-1 bg-border" />
+          <span className="text-sm font-semibold text-foreground/40 uppercase tracking-widest">or pay with PayPal</span>
+          <div className="h-px flex-1 bg-border" />
+        </div>
+
+        {/* Section 2 — PayPal hosted checkout */}
+        <section className="mb-4">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Secure Payment</p>
+          <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Pay with PayPal.</h2>
+          <p className="mb-6 max-w-2xl text-sm leading-6 text-foreground/60">
+            Use the PayPal checkout below, scan the QR code on your phone, or open the{" "}
+            <a
+              href={PAYPAL_PAYMENT_LINK}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-primary underline-offset-2 hover:underline"
+            >
+              payment link
+            </a>{" "}
+            in a new tab.
+          </p>
+          <PayPalHostedButton />
         </section>
 
         {/* OR divider */}
