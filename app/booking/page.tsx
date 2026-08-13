@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { BokunWidget } from "@/components/PartnerWidgets";
-import { PayPalHostedButton } from "@/components/PayPalButton";
+import { PayPalCheckout } from "@/components/PayPalCheckout";
 import {
   buildBookingFollowUpTemplate,
   buildMailToLink,
@@ -13,15 +13,7 @@ import {
   buildWhatsAppLink,
   serviceProviderContact,
 } from "@/lib/clientMessageTemplates";
-
-const tourOptions = [
-  { id: "1", title: "Victoria Falls Guided Tour", price: 65 },
-  { id: "2", title: "Zambezi Sunset Cruise", price: 85 },
-  { id: "3", title: "Chobe Day Safari", price: 175 },
-  { id: "4", title: "Falls Helicopter Flight", price: 160 },
-  { id: "5", title: "Village & Market Visit", price: 45 },
-  { id: "6", title: "Boma Dinner Experience", price: 70 },
-];
+import { serviceOptions } from "@/lib/serviceOptions";
 
 function BookingForm() {
   const searchParams = useSearchParams();
@@ -39,8 +31,8 @@ function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const selectedTour = tourOptions.find((t) => t.id === form.tourId);
-  const total = selectedTour ? selectedTour.price * parseInt(form.guests || "1") : 0;
+  const selectedTour = serviceOptions.find((t) => t.id === form.tourId);
+  const total = selectedTour ? selectedTour.price * parseInt(form.guests || "1", 10) : 0;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -84,17 +76,17 @@ function BookingForm() {
             Thank you, {form.name}. Your enquiry for <strong>{selectedTour?.title}</strong> has been received.
           </p>
           <p className="mb-8 text-foreground/60">
-            A confirmation has been sent to <strong>{form.email}</strong>. Reach us directly to confirm, or pay securely with PayPal:
+            A confirmation has been sent to <strong>{form.email}</strong>. Reach us directly to confirm, or use Pay with PayPal on the booking page to pay for selected services.
           </p>
-          <div className="mb-8 text-left">
-            <PayPalHostedButton />
-          </div>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Link href={emailHref} className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
               Email Provider
             </Link>
             <Link href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-md bg-cta px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-cta-hover">
               WhatsApp Provider
+            </Link>
+            <Link href="/booking" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
+              Pay with PayPal
             </Link>
             <Link href="/" className="inline-flex items-center justify-center rounded-md border border-border bg-background/10 px-6 py-3 text-sm font-bold text-foreground transition-colors hover:bg-background/20">
               Back to Home
@@ -127,7 +119,7 @@ function BookingForm() {
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-accent-light sm:text-sm">Booking</p>
           <h1 className="max-w-3xl text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl">Book your tour with a cleaner flow.</h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-white/72">Check live availability and book via Bokun, pay securely with PayPal, or send us an enquiry and we will confirm the details.</p>
+          <p className="mt-5 max-w-2xl text-base leading-7 text-white/72">Check live availability and book via Bokun, select services and pay with PayPal, or send us an enquiry and we will confirm the details.</p>
         </div>
       </section>
 
@@ -150,14 +142,14 @@ function BookingForm() {
           <div className="h-px flex-1 bg-border" />
         </div>
 
-        {/* Section 2 — PayPal hosted checkout */}
+        {/* Section 2 — Dynamic PayPal checkout */}
         <section className="mb-4">
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Secure Payment</p>
-          <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Pay with PayPal.</h2>
+          <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Select services and pay with PayPal.</h2>
           <p className="mb-6 max-w-2xl text-sm leading-6 text-foreground/60">
-            Three equal PayPal options: stacked buttons on this page, scan the QR code, or open the payment link — pick whichever is easiest.
+            Choose one or more experiences, enter your details, and pay the catalog total securely with PayPal. This path is separate from Bokun checkout.
           </p>
-          <PayPalHostedButton />
+          <PayPalCheckout initialServiceId={prefilledTourId} />
         </section>
 
         {/* OR divider */}
@@ -167,7 +159,7 @@ function BookingForm() {
           <div className="h-px flex-1 bg-border" />
         </div>
 
-        {/* Section 2 — Enquiry form */}
+        {/* Section 3 — Enquiry form */}
         <section>
           <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Enquiry</p>
           <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Prefer to talk it through first?</h2>
@@ -181,7 +173,7 @@ function BookingForm() {
                 <h3 className="mb-4 text-base font-semibold text-foreground">Select a tour</h3>
                 <select name="tourId" value={form.tourId} onChange={handleChange} required className="w-full rounded-md border border-border bg-background px-3 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/40">
                   <option value="">Choose a tour...</option>
-                  {tourOptions.map((t) => (
+                  {serviceOptions.map((t) => (
                     <option key={t.id} value={t.id}>{t.title} — ${t.price}</option>
                   ))}
                 </select>
@@ -249,7 +241,7 @@ function BookingForm() {
                 <p className="text-sm text-foreground/50">Select a tour to see a summary</p>
               )}
               <p className="mt-6 text-xs leading-5 text-foreground/40">
-                This enquiry form is a request only. Confirmed pricing and availability is provided by Bokun above or by our team via email/WhatsApp.
+                This enquiry form is a request only. Confirmed pricing and availability is provided by Bokun above, PayPal checkout for catalog payments, or by our team via email/WhatsApp.
               </p>
             </div>
           </div>

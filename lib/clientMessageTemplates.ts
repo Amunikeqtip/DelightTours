@@ -18,6 +18,11 @@ type ClientMessageDetails = {
   tourOrServiceName?: string;
   selectedServices?: string[];
   date?: string;
+  guests?: string;
+  notes?: string;
+  amountPaid?: string;
+  currency?: string;
+  transactionId?: string;
 };
 
 function valueOrPlaceholder(value: string | undefined, placeholder: string) {
@@ -346,6 +351,92 @@ export function buildReviewRequestEmailHtml(details: ClientMessageDetails = {}) 
     </p>
     <p>Thank you for travelling with ${providerName}.</p>
     <p>Warm regards,<br />The Delight Tours Team</p>`,
+  );
+}
+
+export function buildPayPalPaymentAdminTemplate(details: ClientMessageDetails = {}) {
+  const clientName = valueOrPlaceholder(details.clientName, "[Client Name]");
+  const clientEmail = valueOrPlaceholder(details.clientEmail, "[Client Email]");
+  const clientPhone = valueOrPlaceholder(details.clientPhone, "[Client Phone]");
+  const tourOrServiceName = valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]");
+  const date = valueOrPlaceholder(details.date, "[Date]");
+  const guests = valueOrPlaceholder(details.guests, "[Guests]");
+  const notes = valueOrPlaceholder(details.notes, "None");
+  const amountPaid = valueOrPlaceholder(details.amountPaid, "[Amount]");
+  const currency = valueOrPlaceholder(details.currency, "USD");
+  const transactionId = valueOrPlaceholder(details.transactionId, "[Transaction ID]");
+
+  return `${buildCompanyIntro()}
+
+PayPal payment received
+
+Client: ${clientName}
+Email: ${clientEmail}
+Phone: ${clientPhone}
+Services: ${tourOrServiceName}
+Preferred date: ${date}
+Guests: ${guests}
+Amount paid: ${currency} ${amountPaid}
+PayPal transaction: ${transactionId}
+Notes: ${notes}
+
+Please confirm scheduling and send pickup/meeting details to the client.
+
+${buildCompanyFooter()}`;
+}
+
+export function buildPayPalPaymentAdminEmailHtml(details: ClientMessageDetails = {}) {
+  const clientName = escapeHtml(valueOrPlaceholder(details.clientName, "[Client Name]"));
+  const clientEmail = escapeHtml(valueOrPlaceholder(details.clientEmail, "[Client Email]"));
+  const clientPhone = escapeHtml(valueOrPlaceholder(details.clientPhone, "[Client Phone]"));
+  const tourOrServiceName = escapeHtml(valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]"));
+  const date = escapeHtml(valueOrPlaceholder(details.date, "[Date]"));
+  const guests = escapeHtml(valueOrPlaceholder(details.guests, "[Guests]"));
+  const notes = escapeHtml(valueOrPlaceholder(details.notes, "None"));
+  const amountPaid = escapeHtml(valueOrPlaceholder(details.amountPaid, "[Amount]"));
+  const currency = escapeHtml(valueOrPlaceholder(details.currency, "USD"));
+  const transactionId = escapeHtml(valueOrPlaceholder(details.transactionId, "[Transaction ID]"));
+
+  return renderBrandedEmailHtml(
+    "PayPal payment received",
+    `<p><strong>PayPal payment received</strong></p>
+    ${buildClientDetailsHtml(details)}
+    <table role="presentation" style="margin:0 0 22px;padding:16px;border:1px solid #e2d7c5;border-radius:6px;background:#fbf8f2;width:100%;">
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Services</td><td>${tourOrServiceName}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Preferred date</td><td>${date}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Guests</td><td>${guests}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Amount paid</td><td>${currency} ${amountPaid}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Transaction ID</td><td>${transactionId}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Notes</td><td>${notes}</td></tr>
+    </table>
+    <p>Client contact: ${clientName} · ${clientEmail} · ${clientPhone}</p>
+    <p>Please confirm scheduling and send pickup/meeting details.</p>`,
+  );
+}
+
+export function buildPayPalPaymentClientEmailHtml(details: ClientMessageDetails = {}) {
+  const clientName = escapeHtml(valueOrPlaceholder(details.clientName, "[Client Name]"));
+  const tourOrServiceName = escapeHtml(valueOrPlaceholder(details.tourOrServiceName, "[Tour/Service Name]"));
+  const date = escapeHtml(valueOrPlaceholder(details.date, "[Date]"));
+  const guests = escapeHtml(valueOrPlaceholder(details.guests, "[Guests]"));
+  const amountPaid = escapeHtml(valueOrPlaceholder(details.amountPaid, "[Amount]"));
+  const currency = escapeHtml(valueOrPlaceholder(details.currency, "USD"));
+  const transactionId = escapeHtml(valueOrPlaceholder(details.transactionId, "[Transaction ID]"));
+  const providerName = escapeHtml(serviceProviderContact.providerName);
+
+  return renderBrandedEmailHtml(
+    "Payment confirmation",
+    `<p>Hi ${clientName},</p>
+    <p>Thank you — we received your PayPal payment for <strong>${tourOrServiceName}</strong>.</p>
+    <table role="presentation" style="margin:0 0 22px;padding:16px;border:1px solid #e2d7c5;border-radius:6px;background:#fbf8f2;width:100%;">
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Preferred date</td><td>${date}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Guests</td><td>${guests}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Amount paid</td><td>${currency} ${amountPaid}</td></tr>
+      <tr><td style="padding:4px 0;font-weight:700;color:#174437;">Transaction ID</td><td>${transactionId}</td></tr>
+    </table>
+    <p>Our team will confirm timing and meeting details shortly. Catalog prices were used for this payment; availability is finalized by ${providerName}.</p>
+    <p>Questions? Email ${escapeHtml(serviceProviderContact.email)} or WhatsApp ${escapeHtml(serviceProviderContact.phone)}.</p>
+    <p>Warm regards,<br />${providerName}</p>`,
   );
 }
 

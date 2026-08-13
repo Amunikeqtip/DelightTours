@@ -4,17 +4,8 @@ import Image from "next/image";
 import Script from "next/script";
 import { useEffect, useId, useState } from "react";
 
-declare global {
-  interface Window {
-    paypal?: {
-      HostedButtons: (config: { hostedButtonId: string }) => {
-        render: (selector: string) => Promise<void> | void;
-      };
-    };
-  }
-}
-
-const PAYPAL_CLIENT_ID =
+/** Hosted Buttons / NCP client id (not the REST Orders API client id). */
+const PAYPAL_HOSTED_CLIENT_ID =
   "BAAoxsWMeNs_YfCFJJrsvfm4cfeaVpgBjahdRG9yNdOK_HzhaeujjO5ZgR-Vvu0yWHyBrmT0ZH7-Qqxnqs";
 const PAYPAL_HOSTED_BUTTON_ID = "LJ2JTZ2TM6E5E";
 
@@ -49,7 +40,7 @@ function PaymentOption({
 }
 
 export function PayPalHostedButton({ className }: PayPalHostedButtonProps) {
-  const clientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || PAYPAL_CLIENT_ID;
+  const clientId = process.env.NEXT_PUBLIC_PAYPAL_HOSTED_CLIENT_ID || PAYPAL_HOSTED_CLIENT_ID;
   const hostedButtonId = process.env.NEXT_PUBLIC_PAYPAL_HOSTED_BUTTON_ID || PAYPAL_HOSTED_BUTTON_ID;
   const paymentLink = process.env.NEXT_PUBLIC_PAYPAL_PAYMENT_LINK || PAYPAL_PAYMENT_LINK;
   const reactId = useId().replace(/:/g, "");

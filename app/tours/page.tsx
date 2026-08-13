@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { BokunWidget } from "@/components/PartnerWidgets";
+import { PayPalHostedButton } from "@/components/PayPalButton";
 
 export default function ToursPage() {
   return (
@@ -29,6 +30,17 @@ export default function ToursPage() {
       <section className="bg-accent-cream px-4 py-10 text-foreground sm:px-6 md:py-14">
         <div className="mx-auto max-w-7xl">
           <BokunWidget />
+        </div>
+      </section>
+
+      <section className="bg-background px-4 py-12 text-foreground sm:px-6 md:py-16">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-accent-light">Also accept PayPal</p>
+          <h2 className="mb-1 text-2xl font-bold text-foreground sm:text-3xl">Prefer to pay with PayPal?</h2>
+          <p className="mb-6 max-w-2xl text-sm leading-6 text-foreground/60">
+            Alongside Bokun checkout above, you can use our Safari Experience PayPal quick-pay (stacked buttons, QR code, or payment link). For a custom multi-service total, use Pay with PayPal on the booking page.
+          </p>
+          <PayPalHostedButton />
         </div>
       </section>
     </div>
