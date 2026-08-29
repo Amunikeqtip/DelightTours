@@ -25,11 +25,23 @@ function WidgetFallback({ title, description, logoSrc, logoAlt }: WidgetCardProp
 }
 
 const BOKUN_BOOKING_CHANNEL_UUID = "bc5131c1-3cee-4ff1-a7d7-248d1afa0909";
-const BOKUN_WIDGET_DATA_SRC = "https://widgets.bokun.io/online-sales/bc5131c1-3cee-4ff1-a7d7-248d1afa0909/product-list/109041";
+const BOKUN_PRODUCT_LIST_ID = "109041";
+
+function buildBokunWidgetDataSrc(bookingChannelUuid: string, productListId: string) {
+  return `https://widgets.bokun.io/online-sales/${bookingChannelUuid}/product-list/${productListId}`;
+}
 
 export function BokunWidget() {
   const bookingChannelUuid = process.env.NEXT_PUBLIC_BOKUN_BOOKING_CHANNEL_UUID || BOKUN_BOOKING_CHANNEL_UUID;
-  const widgetDataSrc = process.env.NEXT_PUBLIC_BOKUN_WIDGET_DATA_SRC || BOKUN_WIDGET_DATA_SRC;
+  const productListId = process.env.NEXT_PUBLIC_BOKUN_PRODUCT_LIST_ID || BOKUN_PRODUCT_LIST_ID;
+  const configuredDataSrc = process.env.NEXT_PUBLIC_BOKUN_WIDGET_DATA_SRC;
+
+  // Bókun aborts rendering when the loader and the widget reference different booking
+  // channels, so a data-src pointing at another channel is discarded rather than trusted.
+  const widgetDataSrc =
+    configuredDataSrc && configuredDataSrc.includes(bookingChannelUuid)
+      ? configuredDataSrc
+      : buildBokunWidgetDataSrc(bookingChannelUuid, productListId);
 
   const loaderSrc = `https://widgets.bokun.io/assets/javascripts/apps/build/BokunWidgetsLoader.js?bookingChannelUUID=${encodeURIComponent(bookingChannelUuid)}`;
 
